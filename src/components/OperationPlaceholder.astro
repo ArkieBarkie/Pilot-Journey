@@ -7,11 +7,11 @@ interface Props {
 const { variant, title } = Astro.props;
 ---
 
-<div class:list={["operation-placeholder", `is-${variant}`]} data-screenshot-placeholder={variant}>
+<div class:list={["operation-placeholder", `is-${variant}`]} data-product-module={variant}>
   <div class="placeholder-toolbar">
     <div><i></i><i></i><i></i></div>
     <span>PILOT JOURNEY / {variant.toUpperCase()}</span>
-    <small>SCREEN PLACEHOLDER</small>
+    <small>PRODUCT MODULE</small>
   </div>
 
   {
@@ -19,17 +19,17 @@ const { variant, title } = Astro.props;
       <div class="dashboard-ui">
         <aside>
           <b>PJ</b>
-          {["CAREER", "OPS", "LOGBOOK", "MARKET"].map((item) => <span>{item}</span>)}
+          {["DASHBOARD", "SCHEDULE", "LIVE FLIGHT", "LOGBOOK"].map((item) => <span>{item}</span>)}
         </aside>
         <div class="dashboard-main">
           <div class="placeholder-heading">
-            <small>CURRENT ASSIGNMENT</small>
-            <strong>KORD <i>→</i> KACY</strong>
+            <small>LIVE · IN PROGRESS</small>
+            <strong>LIRF <i>→</i> LGZA</strong>
           </div>
           <div class="dashboard-panels">
-            <article><small>CONTRACT</small><b>First Officer</b><span>A320 family</span></article>
-            <article><small>STATUS</small><b>Ready</b><span>Report by 11:45Z</span></article>
-            <article><small>CAREER</small><b>1,780 H</b><span>Reputation stable</span></article>
+            <article><small>CONTRACT</small><b>Vueling Airlines</b><span>A320 · EC-BYZ</span></article>
+            <article><small>STATUS</small><b>In flight</b><span>VLG3342 · FL370</span></article>
+            <article><small>CAREER</small><b>Level 38</b><span>Chief Pilot · C</span></article>
           </div>
         </div>
       </div>
@@ -39,11 +39,11 @@ const { variant, title } = Astro.props;
   {
     variant === "market" && (
       <div class="market-ui">
-        <div class="market-filter"><span>AIRLINE MARKET</span><b>18 OPEN POSITIONS</b></div>
+        <div class="market-filter"><span>CHARTER BOARD</span><b>688 AVAILABLE</b></div>
         {[
-          ["NA", "North Atlantic", "B738 / A320", "OPEN"],
-          ["SA", "Summit Air", "E190 / A220", "ELIGIBLE"],
-          ["PJ", "Pacific Jet", "B787", "2,500 H REQ"],
+          ["LIRF", "Rome → Pescara", "P28T · 94 NM", "$500"],
+          ["LIRF", "Rome → Falconara", "M20T · 119 NM", "$550"],
+          ["LIRF", "Rome → Olbia", "C172 · 135 NM", "$600"],
         ].map((row) => (
           <div class="market-row">
             <b>{row[0]}</b><span><strong>{row[1]}</strong><small>{row[2]}</small></span><i>{row[3]}</i>
@@ -56,14 +56,14 @@ const { variant, title } = Astro.props;
   {
     variant === "contract" && (
       <div class="contract-ui">
-        <div class="contract-stamp">OFFER</div>
-        <small>POSITION / FIRST OFFICER</small>
-        <h3>Contract conditions</h3>
+        <div class="contract-stamp">ACTIVE</div>
+        <small>CONTRACT / CHIEF PILOT</small>
+        <h3>Vueling Airlines</h3>
         <div class="contract-grid">
-          <span>AIRCRAFT <b>A320 family</b></span>
-          <span>BASE <b>KDFW</b></span>
-          <span>TERM <b>12 months</b></span>
-          <span>ROTATION <b>Assigned</b></span>
+          <span>FLEET <b>A320 · A20N</b></span>
+          <span>BASE <b>LEBL</b></span>
+          <span>PAYOUT <b>3.34×</b></span>
+          <span>STATUS <b>In service</b></span>
         </div>
         <div class="contract-sign">REVIEW TERMS <i>→</i></div>
       </div>
@@ -73,13 +73,13 @@ const { variant, title } = Astro.props;
   {
     variant === "assignment" && (
       <div class="assignment-ui">
-        <div class="assignment-top"><span>FLIGHT ASSIGNMENT</span><b>CONFIRMED</b></div>
+        <div class="assignment-top"><span>AIRLINE SCHEDULE · LEG 07</span><b>SELECTED</b></div>
         <div class="route-display">
-          <div><small>ORIGIN</small><strong>KORD</strong><span>CHICAGO</span></div>
-          <i><b>NKS943</b><em></em><small>02H 04M</small></i>
-          <div><small>DESTINATION</small><strong>KACY</strong><span>ATLANTIC CITY</span></div>
+          <div><small>ORIGIN</small><strong>LIRF</strong><span>ROME</span></div>
+          <i><b>VLG3342</b><em></em><small>01H 45M</small></i>
+          <div><small>DESTINATION</small><strong>LGZA</strong><span>ZAKYNTHOS</span></div>
         </div>
-        <div class="assignment-meta"><span>A320neo</span><span>GATE C17</span><span>STD 11:45Z</span></div>
+        <div class="assignment-meta"><span>A320 · EC-BYZ</span><span>$1,886</span><span>880 MILES</span></div>
       </div>
     )
   }
@@ -87,12 +87,9 @@ const { variant, title } = Astro.props;
   {
     variant === "logbook" && (
       <div class="logbook-ui">
-        <div class="logbook-head"><span>CAREER HISTORY</span><b>1,780:24 TOTAL</b></div>
+        <div class="logbook-head"><span>FLIGHT LOG</span><b>1H 26M BLOCK</b></div>
         {[
-          ["21 JUL", "NKS943", "KORD → KACY", "02:04", "COMPLETED"],
-          ["19 JUL", "NKS218", "KMCO → KDFW", "02:31", "COMPLETED"],
-          ["16 JUL", "NKS660", "KDFW → KLAS", "02:42", "REVIEWED"],
-          ["12 JUL", "TRN042", "KDFW → KDFW", "01:18", "TRAINING"],
+          ["08 JUL", "DEBUG1", "LXGB → DAAE", "01:26", "A−"],
         ].map((row) => (
           <div class="logbook-row">
             {row.map((cell, index) => index === 4 ? <i>{cell}</i> : <span>{cell}</span>)}
@@ -102,7 +99,7 @@ const { variant, title } = Astro.props;
     )
   }
 
-  <span class="sr-label">{title}. Temporary interface placeholder.</span>
+  <span class="sr-label">{title}. Product interface module based on the current Pilot Journey app.</span>
 </div>
 
 <style>

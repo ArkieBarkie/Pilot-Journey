@@ -18,12 +18,14 @@ import {
   productPrinciples,
   productStats,
   progressionRequirements,
+  ratingTiers,
+  scoringComponents,
 } from "../data/home";
 ---
 
 <BaseLayout
   title="Pilot Journey | From student pilot to the left seat"
-  description="Build a persistent aviation career through contracts, assigned operations and progression for Microsoft Flight Simulator."
+  description="Choose contracts, dispatch with SimBrief, fly in Microsoft Flight Simulator and build one persistent career through scoring, ratings, airlines and progression."
 >
   <section class="hero" aria-labelledby="hero-title">
     <span class="hero-aircraft" aria-hidden="true">✈</span>
@@ -43,7 +45,7 @@ import {
 
         <p class="hero-payoff">From student pilot to the left seat.</p>
         <p class="hero-lede">
-          Fly the contracts. Earn the ratings. Build a career that continues after every flight.
+          Choose the operation. Fly it in MSFS. Build a career that remembers every route, rating and result.
         </p>
 
         <div class="button-row">
@@ -79,11 +81,11 @@ import {
         <div class="flight-slip">
           <span>Next operation</span>
           <div>
-            <strong class="airport-code">KORD</strong>
+            <strong class="airport-code">LIRF</strong>
             <i aria-hidden="true">→</i>
-            <strong class="airport-code">KACY</strong>
+            <strong class="airport-code">LGZA</strong>
           </div>
-          <small>Flight NKS943 · Assigned</small>
+          <small>VLG3342 · A320 · Live operation</small>
         </div>
       </div>
     </div>
@@ -118,7 +120,7 @@ import {
 
       <p class="mission-statement" data-reveal>
         <span aria-hidden="true">“</span>
-        You are not selecting random flights. You are building a career.
+        The flight ends. The career continues.
       </p>
     </div>
   </section>
@@ -187,7 +189,7 @@ import {
         </figcaption>
       </figure>
 
-      <!-- TODO(content): replace every data-screenshot-placeholder interface with its final product screenshot. -->
+      <!-- Product modules use verified content from the current desktop app. -->
       <div class="operation-stories">
         {operationFeatures.map((feature, index) => (
           <article class:list={["operation-story", { "story-reverse": index % 2 === 1 }]} data-reveal>
@@ -204,18 +206,26 @@ import {
 
             <div class="story-visual">
               {
-                feature.visual === "screenshot" ? (
+                feature.visual === "mailbox" || feature.visual === "live-flight" ? (
                   <figure class="mailbox-window">
                     <div class="console-bar">
                       <div><i></i><i></i><i></i></div>
-                      <span>OPERATIONAL MAILBOX</span>
+                      <span>{feature.visual === "mailbox" ? "OPERATIONAL MAILBOX" : "LIVE FLIGHT / VLG3342"}</span>
                       <small>PRODUCT SCREEN</small>
                     </div>
                     <img
-                      src={withBase("/media/pilot-journey-app.png")}
-                      alt="Operational mailbox with messages from airlines, operations and training"
-                      width="1600"
-                      height="1013"
+                      src={withBase(
+                        feature.visual === "mailbox"
+                          ? "/media/pilot-journey-app.png"
+                          : "/media/pilot-journey-live-flight.png",
+                      )}
+                      alt={
+                        feature.visual === "mailbox"
+                          ? "Operational mailbox with dispatch, airline, training and finance messages"
+                          : "Live Flight briefing for VLG3342 from Rome to Zakynthos"
+                      }
+                      width={feature.visual === "mailbox" ? "1600" : "1666"}
+                      height={feature.visual === "mailbox" ? "1013" : "1028"}
                       loading="lazy"
                     />
                   </figure>
@@ -246,22 +256,23 @@ import {
       <div class="events-layout">
         <article class="event-mail" data-reveal>
           <div class="mail-head">
-            <div class="mail-sender">FO</div>
-            <div><strong>Flight Operations</strong><span>operations@airline.ops</span></div>
+            <div class="mail-sender">DP</div>
+            <div><strong>Dispatch</strong><span>dispatch@pilotjourney.ops</span></div>
             <small>IN-GAME EVENT</small>
           </div>
           <div class="mail-routing">
-            <span>FROM</span><b>Flight Operations</b>
-            <span>SUBJECT</span><b>Fleet transition opportunity</b>
-            <span>STATUS</span><i>ACTION REQUIRED</i>
+            <span>FROM</span><b>Dispatch</b>
+            <span>SUBJECT</span><b>Flight plan filed: VLG3342</b>
+            <span>STATUS</span><i>BRIEFING READY</i>
           </div>
-          <h3>Fleet transition opportunity</h3>
+          <h3>Rome to Zakynthos is filed.</h3>
           <p>
-            Due to upcoming network changes, qualified pilots may request transition training for the A321 fleet.
+            Cruise FL370 with 6,797 kg block fuel. The full OFP, weights, filed route and procedures are waiting on
+            the Live Flight page.
           </p>
           <div class="mail-actions">
-            <span>REVIEW REQUIREMENTS</span>
-            <span>DECISION PENDING</span>
+            <span>OPEN LIVE FLIGHT</span>
+            <span>DISPATCH · BRIEFING</span>
           </div>
         </article>
 
@@ -279,15 +290,67 @@ import {
     </div>
   </section>
 
+  <section id="performance" class="section performance-section passport-grid" aria-labelledby="performance-title">
+    <div class="container">
+      <div class="performance-heading" data-reveal>
+        <div>
+          <Eyebrow label="Flight quality" light />
+          <h2 id="performance-title" class="section-title">The debrief reads more than the touchdown.</h2>
+        </div>
+        <p class="section-lede">
+          Pilot Journey turns live simulator telemetry into a transparent 0–100 score. The result moves reputation
+          and becomes part of the permanent logbook.
+        </p>
+      </div>
+
+      <div class="performance-grid">
+        <div class="score-cards">
+          {scoringComponents.map((component) => (
+            <article data-reveal>
+              <strong>{component.value}</strong>
+              <div>
+                <h3>{component.title}</h3>
+                <p>{component.copy}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <article class="ratings-dossier" data-reveal>
+          <div class="ratings-head">
+            <span>TRAINING FILE / 09 TIERS</span>
+            <b>CAREER LADDER</b>
+          </div>
+          <h3>From single piston to supersonic.</h3>
+          <ol>
+            {ratingTiers.map((tier, index) => (
+              <li><span>{String(index + 1).padStart(2, "0")}</span>{tier}</li>
+            ))}
+          </ol>
+          <p>
+            Airlines check both level and prerequisite ratings. Signing can grant the starter-fleet rating, with a
+            training bond that runs down over 30 block hours.
+          </p>
+        </article>
+      </div>
+
+      <div class="score-rule" data-reveal>
+        <span>QUALITY RULE</span>
+        <p>The agreed payout is paid in full. Your score moves reputation and the opportunities available next.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="career" class="section career-path-section" aria-labelledby="career-title">
     <div class="container">
       <div class="career-path-heading" data-reveal>
         <div>
           <Eyebrow label="Career path" />
-          <h2 id="career-title" class="section-title">Earn the seat. Do not simply select it.</h2>
+          <h2 id="career-title" class="section-title">Earn the seat through a real rank ladder.</h2>
         </div>
         <p class="section-lede">
-          Your next position is determined by what you have achieved, not by a dropdown menu.
+          Airline employment follows seven ranks from Cadet to Chief Pilot, while unsigned pilots build through a
+          parallel charter ladder.
         </p>
       </div>
 
@@ -319,8 +382,8 @@ import {
         <Eyebrow label="Global operations" light />
         <h2 id="global-title" class="section-title">A career without a fixed horizon.</h2>
         <p class="section-lede">
-          Move between operators, aircraft families, bases and regions as your experience grows. Each choice becomes
-          part of your personal aviation history.
+          Search 9,685 airports, qualify for 231 airline profiles and work through 158 aircraft variants across 60
+          families. The world is reference data and a source of real operations.
         </p>
 
         <dl class="global-stats">
@@ -355,8 +418,8 @@ import {
         <Eyebrow label="Simulator integration" />
         <h2 id="integration-title" class="section-title">Built around the flight, not around administration.</h2>
         <p class="section-lede">
-          Pilot Journey adds structure and consequence before and after each flight, while Microsoft Flight Simulator
-          remains where the actual flying happens.
+          Local SimConnect, a remote Bridge and optional SimBrief dispatch connect the career console to the
+          simulator without replacing the tools pilots already use.
         </p>
       </div>
 
@@ -1378,6 +1441,163 @@ import {
     content: "→";
   }
 
+  .performance-section {
+    position: relative;
+    overflow: hidden;
+    color: var(--color-passport-fg);
+    background-color: var(--color-passport);
+  }
+
+  .performance-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.68fr);
+    gap: 90px;
+    align-items: end;
+  }
+
+  .performance-heading .section-title {
+    max-width: 820px;
+    color: var(--color-passport-fg);
+  }
+
+  .performance-heading .section-lede {
+    color: var(--color-passport-muted);
+  }
+
+  .performance-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.88fr) minmax(430px, 1.12fr);
+    gap: 70px;
+    align-items: start;
+    margin-top: 70px;
+  }
+
+  .score-cards {
+    border-top: 1px solid var(--color-passport-line);
+  }
+
+  .score-cards article {
+    display: grid;
+    grid-template-columns: 116px 1fr;
+    gap: 26px;
+    align-items: center;
+    min-height: 132px;
+    border-bottom: 1px solid var(--color-passport-line);
+  }
+
+  .score-cards article > strong {
+    color: var(--color-passport-accent);
+    font-family: var(--font-code);
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  .score-cards h3 {
+    margin: 0 0 7px;
+    color: var(--color-passport-fg);
+    font-size: 1.2rem;
+  }
+
+  .score-cards p {
+    margin: 0;
+    color: var(--color-passport-muted);
+    font-size: 0.88rem;
+  }
+
+  .ratings-dossier {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    color: var(--color-fg);
+    background: var(--color-elevated);
+    box-shadow: 0 28px 70px -38px #000;
+  }
+
+  .ratings-head {
+    display: flex;
+    min-height: 58px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 0 22px;
+    color: var(--color-passport-muted);
+    border-bottom: 1px solid var(--color-passport-line);
+    background: var(--color-passport);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+  }
+
+  .ratings-head b {
+    color: var(--color-passport-accent);
+  }
+
+  .ratings-dossier > h3 {
+    margin: 0;
+    padding: 26px 24px 20px;
+    color: var(--color-fg-strong);
+    font-size: 1.55rem;
+  }
+
+  .ratings-dossier ol {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0;
+    padding: 0 24px;
+    list-style: none;
+    border-top: 1px solid var(--color-border);
+    border-left: 1px solid var(--color-border);
+  }
+
+  .ratings-dossier li {
+    display: grid;
+    min-height: 74px;
+    align-content: center;
+    gap: 5px;
+    padding: 10px 12px;
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-fg-strong);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .ratings-dossier li span {
+    color: var(--color-accent-bright);
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+  }
+
+  .ratings-dossier > p {
+    margin: 0;
+    padding: 20px 24px 24px;
+    color: var(--color-fg-muted);
+    font-size: 0.84rem;
+  }
+
+  .score-rule {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 24px;
+    align-items: center;
+    margin-top: 46px;
+    padding-top: 22px;
+    border-top: 1px solid var(--color-passport-line);
+  }
+
+  .score-rule span {
+    color: var(--color-passport-accent);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+  }
+
+  .score-rule p {
+    margin: 0;
+    color: var(--color-passport-muted);
+  }
+
   .career-path-section {
     overflow: hidden;
   }
@@ -1385,7 +1605,7 @@ import {
   .career-timeline {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(7, 1fr);
     margin: 76px 0 0;
     padding: 0;
     list-style: none;
@@ -2015,6 +2235,8 @@ import {
     .split-heading,
     .operations-intro,
     .events-heading,
+    .performance-heading,
+    .performance-grid,
     .career-path-heading,
     .events-layout,
     .global-grid,
@@ -2028,6 +2250,10 @@ import {
 
     .mission-files {
       grid-template-columns: 1fr;
+    }
+
+    .performance-grid {
+      margin-top: 50px;
     }
 
     .mission-file,
@@ -2311,6 +2537,23 @@ import {
 
     .career-stage h3 {
       min-height: 0;
+    }
+
+    .score-cards article {
+      grid-template-columns: 88px 1fr;
+    }
+
+    .score-cards article > strong {
+      font-size: 2.35rem;
+    }
+
+    .ratings-dossier ol {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .score-rule {
+      grid-template-columns: 1fr;
+      gap: 10px;
     }
 
     .global-stats {

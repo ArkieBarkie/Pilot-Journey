@@ -1,66 +1,66 @@
 export const productStats = [
-  { label: "Aircraft profiles", value: "150+" },
-  { label: "Airline network", value: "230+" },
-  { label: "Simulator support", value: "MSFS 2020 / 2024" },
+  { label: "Airports", value: "9,685" },
+  { label: "Airline profiles", value: "231" },
+  { label: "Aircraft variants", value: "158" },
 ] as const;
 
 export const missionFiles = [
   {
     number: "01",
     title: "A persistent career",
-    copy: "Every application, contract and completed flight becomes part of your permanent career record.",
+    copy: "Contracts, ratings, money, reputation and every completed leg remain connected in one permanent career record.",
     register: "CAREER RECORD",
   },
   {
     number: "02",
-    title: "Flights with a purpose",
-    copy: "Operate assigned routes for real-world-inspired airlines instead of choosing another disconnected free flight.",
+    title: "An operation to fly",
+    copy: "Choose a charter contract or fly your airline rotation in sequence, with a real route, aircraft, briefing and reward.",
     register: "ASSIGNED OPS",
   },
   {
     number: "03",
-    title: "Progress that matters",
-    copy: "Build experience, protect your reputation and qualify for new aircraft, airlines and command opportunities.",
-    register: "QUALIFICATION",
+    title: "Performance with consequences",
+    copy: "Landing quality, punctuality and FOQA events shape your score, reputation and the opportunities that open next.",
+    register: "FLIGHT QUALITY",
   },
 ] as const;
 
 export const careerLoop = [
   {
     number: "01",
-    title: "Search",
-    copy: "Explore airline vacancies and available career opportunities.",
-    status: "MARKET OPEN",
+    title: "Choose",
+    copy: "Pick a global charter contract or report for the next leg in your airline rotation.",
+    status: "BOARD OPEN",
   },
   {
     number: "02",
-    title: "Apply",
-    copy: "Meet the requirements and submit an application.",
-    status: "FILED",
+    title: "Brief",
+    copy: "Review the route, METAR, aircraft, schedule, payout, distance and operational details.",
+    status: "ASSIGNED",
   },
   {
     number: "03",
-    title: "Sign",
-    copy: "Review the offer, aircraft assignment, base and contract conditions.",
-    status: "CONTRACT",
+    title: "Dispatch",
+    copy: "Open SimBrief and fetch the OFP for fuel, times, cruise level and the filed route.",
+    status: "OFP FILED",
   },
   {
     number: "04",
-    title: "Operate",
-    copy: "Fly the assigned route in Microsoft Flight Simulator.",
+    title: "Fly",
+    copy: "Fly in MSFS while Pilot Journey records live telemetry, progress and operational events.",
     status: "AIRBORNE",
   },
   {
     number: "05",
-    title: "Report",
-    copy: "Your flight time, performance and operational result are recorded.",
-    status: "LOGGED",
+    title: "Debrief",
+    copy: "Receive a score for landing quality, punctuality and FOQA discipline.",
+    status: "SCORED",
   },
   {
     number: "06",
     title: "Progress",
-    copy: "Build seniority, unlock opportunities and move closer to the left seat.",
-    status: "ADVANCE",
+    copy: "Bank the payout and miles, move your reputation and work toward the next rating or airline.",
+    status: "RECORDED",
   },
 ] as const;
 
@@ -68,163 +68,193 @@ export const operationFeatures = [
   {
     id: "career-dashboard",
     register: "CONSOLE / 01",
-    title: "Start every session with a clear assignment.",
-    copy: "Review your current contract, next operation, career status, recent performance and the opportunities waiting for you.",
+    title: "Start with the operation in front of you.",
+    copy: "See the active flight, next rotation leg, balance, weather, progression, recent legs and current contract from one dashboard.",
     visual: "dashboard",
   },
   {
-    id: "airline-market",
-    register: "MARKET / 02",
-    title: "Find the airline that fits your next move.",
-    copy: "Explore available airlines, bases, fleet types and entry requirements. Your experience determines which doors are open.",
-    visual: "market",
-  },
-  {
-    id: "contracts",
-    register: "CONTRACTS / 03",
-    title: "Read the terms before you take the seat.",
-    copy: "Compare positions, aircraft assignments, expected schedules and contract conditions before accepting an offer.",
-    visual: "contract",
-  },
-  {
-    id: "mailbox",
-    register: "MAILBOX / 04",
-    title: "Your career communicates with you.",
-    copy: "Receive offers, dispatch updates, training notices, performance reviews, operational disruptions and messages from your airline.",
-    visual: "screenshot",
-  },
-  {
-    id: "flight-assignment",
-    register: "DISPATCH / 05",
-    title: "No random route. A real assignment.",
-    copy: "Every operation includes an airline, aircraft, route, flight number and operational context connected to your career.",
+    id: "airline-schedule",
+    register: "SCHEDULE / 02",
+    title: "Fly a real rotation in sequence.",
+    copy: "Airline contracts generate rostered blocks with flight numbers, assigned aircraft, payouts, miles and ordered legs you must work through.",
     visual: "assignment",
   },
   {
+    id: "charter-board",
+    register: "CHARTER / 03",
+    title: "Find work anywhere in the world.",
+    copy: "Filter generated charter contracts by origin, aircraft, distance and region, then weigh the ferry, deadline, passengers and reward.",
+    visual: "market",
+  },
+  {
+    id: "live-flight",
+    register: "LIVE FLIGHT / 04",
+    title: "Carry the briefing into the cockpit.",
+    copy: "Follow the filed route, fuel, weather, flight phase and live progress while SimConnect turns the simulator session into an operation.",
+    visual: "live-flight",
+  },
+  {
+    id: "mailbox",
+    register: "MAILBOX / 05",
+    title: "Your career communicates with you.",
+    copy: "Receive dispatch briefings, airline offers, schedule changes, safety notices, type ratings, recognition and financial warnings.",
+    visual: "mailbox",
+  },
+  {
     id: "logbook",
-    register: "HISTORY / 06",
-    title: "A record of the career you actually flew.",
-    copy: "Flights, aircraft, airlines, promotions and major career events remain available as one continuous history.",
+    register: "LOGBOOK / 06",
+    title: "Keep the record of the career you flew.",
+    copy: "Every completed leg stores its route, aircraft, block time, touchdown, score and payout in one permanent flight history.",
     visual: "logbook",
   },
 ] as const;
 
 export const careerEvents = [
-  { code: "OPS-21", title: "Job offers and contract renewals", type: "message" },
-  { code: "FLT-08", title: "Fleet changes and aircraft transitions", type: "notice" },
-  { code: "BASE-14", title: "Base assignments and transfers", type: "transfer" },
-  { code: "TRN-31", title: "Training and qualification requirements", type: "notice" },
-  { code: "REV-06", title: "Performance reviews and reputation", type: "review" },
-  { code: "IRROPS", title: "Delays, disruptions and operational changes", type: "alert" },
+  { code: "DSP-01", title: "Dispatch briefings and filed flight plans", type: "message" },
+  { code: "OPS-02", title: "Airline schedules, contracts and job offers", type: "notice" },
+  { code: "TRN-03", title: "Type ratings and qualification updates", type: "transfer" },
+  { code: "FOQA-04", title: "Safety notices and performance recognition", type: "review" },
+  { code: "FLT-05", title: "Fleet registrations and aircraft changes", type: "notice" },
+  { code: "FIN-06", title: "Finance warnings and career milestones", type: "alert" },
 ] as const;
 
-// Product labels live here so the career ladder can be revised without touching page markup.
 export const careerPath = [
-  { title: "Student Pilot", gate: "Training record", code: "STU" },
-  { title: "Newly Qualified Pilot", gate: "License + hours", code: "NQP" },
-  { title: "First Officer", gate: "Type qualification", code: "FO" },
-  { title: "Senior First Officer", gate: "Performance + seniority", code: "SFO" },
-  { title: "Captain", gate: "Command requirements", code: "CPT" },
-  { title: "Training Captain or long-term airline career", gate: "Experience + airline need", code: "TRG" },
+  { title: "Cadet", gate: "Levels 1–9", code: "CDT" },
+  { title: "First Officer", gate: "Levels 10–13", code: "FO" },
+  { title: "Senior First Officer", gate: "Levels 14–16", code: "SFO" },
+  { title: "Captain", gate: "Levels 17–20", code: "CPT" },
+  { title: "Senior Captain", gate: "Levels 21–25", code: "SCPT" },
+  { title: "Training Captain", gate: "Levels 26–29", code: "TRG" },
+  { title: "Chief Pilot", gate: "Level 30+", code: "CHF" },
 ] as const;
 
 export const progressionRequirements = [
-  "Flight hours",
-  "Aircraft qualifications",
-  "Performance",
+  "Pilot level",
+  "Prerequisite ratings",
+  "Airline entry tier",
   "Reputation",
-  "Airline requirements",
-  "Previous experience",
+  "Miles flown",
+  "Training bond",
 ] as const;
 
 export const integrationSteps = [
   {
     number: "01",
-    title: "Before the flight",
-    copy: "Review the assignment, aircraft, route and operational context.",
+    title: "Dispatch with SimBrief",
+    copy: "Import the real OFP, scheduled times, cruise level, fuel, alternate and filed route when you want the complete briefing.",
   },
   {
     number: "02",
-    title: "During the flight",
-    copy: "Fly the operation in your preferred simulator environment.",
+    title: "Connect live telemetry",
+    copy: "Use local SimConnect or the remote Bridge while Pilot Journey reads position, speed, fuel, touchdown, overspeed and stall state.",
   },
   {
     number: "03",
-    title: "After the flight",
-    copy: "Record the result and continue your career from where you left off.",
+    title: "Close the operation",
+    copy: "Auto-complete after parking or finish manually, then post the score, payout, miles, reputation change and logbook entry.",
   },
 ] as const;
 
 export const audiences = [
-  "Flight simmers who struggle to decide what to fly next",
-  "Pilots who enjoy airline operations and progression",
-  "Users who want a long-term career rather than isolated flights",
-  "Players who appreciate realistic structure without excessive micromanagement",
+  "Flight simmers who want a reason to choose the next route",
+  "Airline pilots who enjoy schedules, dispatch and operational structure",
+  "GA pilots who want charter work to build toward larger aircraft",
+  "Career players who value persistent records, finances and progression",
 ] as const;
 
 export const productPrinciples = [
   {
+    title: "Operational",
+    copy: "Every flight starts with an assignment, briefing, aircraft and outcome.",
+  },
+  {
     title: "Persistent",
-    copy: "Your history remains connected across airlines and aircraft.",
+    copy: "Routes, landings, ratings, money and reputation survive every session.",
   },
   {
-    title: "Structured",
-    copy: "Assignments, requirements and career opportunities provide direction.",
+    title: "Consequential",
+    copy: "Performance and career decisions change what becomes available next.",
   },
   {
-    title: "Dynamic",
-    copy: "Messages, events and operational changes keep the career moving.",
+    title: "Flexible",
+    copy: "Build from GA charter work, start airline-ready or move between both paths.",
+  },
+] as const;
+
+export const scoringComponents = [
+  {
+    value: "65%",
+    title: "Landing",
+    copy: "Touchdown vertical speed and peak g-force form the landing component.",
   },
   {
-    title: "Personal",
-    copy: "No two career histories need to follow the same route.",
+    value: "35%",
+    title: "On-time",
+    copy: "Arrival against the SimBrief schedule, with a standard 15-minute late window.",
   },
+  {
+    value: "−30",
+    title: "FOQA cap",
+    copy: "Overspeed and stall-warning time can deduct up to 30 points per flight.",
+  },
+] as const;
+
+export const ratingTiers = [
+  "Single piston",
+  "Twin piston",
+  "Turboprop",
+  "Business jet",
+  "Regional jet",
+  "Narrow-body",
+  "Wide-body",
+  "Heavy / jumbo",
+  "Supersonic",
 ] as const;
 
 export const faqItems = [
   {
     question: "What is Pilot Journey?",
     answer:
-      "Pilot Journey is a career operations platform for Microsoft Flight Simulator. It connects applications, contracts, assigned flights, performance and progression into one persistent career.",
+      "Pilot Journey is a career-progression layer for Microsoft Flight Simulator. Contracts, live flights, performance, money, ratings and airline employment become one persistent career.",
   },
   {
-    question: "Is Pilot Journey a flight simulator?",
+    question: "What does the flight score include?",
     answer:
-      "No. The flying still happens in Microsoft Flight Simulator. Pilot Journey provides the career, operational context and continuity around each flight.",
+      "The composite score uses landing quality and on-time arrival when those measurements are available. Overspeed and stall-warning time can apply FOQA deductions. The result moves your reputation, while the agreed payout is paid in full.",
   },
   {
-    question: "Which simulators are supported?",
+    question: "Is SimBrief required?",
     answer:
-      "Pilot Journey is being built for Microsoft Flight Simulator 2020 and Microsoft Flight Simulator 2024.",
+      "No. The career loop works without it. SimBrief is recommended because it adds the real OFP, scheduled times, cruise altitude, fuel figures, alternate and filed route.",
   },
   {
-    question: "Do I choose my own flights?",
+    question: "Does Pilot Journey connect directly to MSFS?",
     answer:
-      "You choose which opportunities to pursue, then operate routes assigned through your airline, contract and current career position.",
+      "Yes. On the same Windows PC it uses local SimConnect. A separate Pilot Journey Bridge supports a second Windows PC or a macOS career console on the same network.",
   },
   {
-    question: "Can I change airlines during my career?",
+    question: "Can I start with general aviation or an airline?",
     answer:
-      "Airline applications and career moves are part of the product direction. Availability depends on your experience, qualifications and the opportunities open to you.",
+      "Yes. Start from zero with GA charter work, or choose the airline-ready path at level 12 with a training-debt balance.",
   },
   {
-    question: "Does my career continue between sessions?",
+    question: "How do aircraft and airlines unlock?",
     answer:
-      "Yes. Your applications, contracts, completed operations and major career events remain part of one continuous record.",
+      "Nine training tiers take you from single piston to supersonic. Airline eligibility checks both your level and your prerequisite ratings; signing can grant the operator's starter-fleet rating with a training bond.",
   },
   {
-    question: "Are real-world airlines and aircraft included?",
+    question: "How large is the operating world?",
     answer:
-      "Pilot Journey uses real-world-inspired airline operations and currently supports more than 150 aircraft profiles and a network of more than 230 airlines. Names and availability may change before release.",
+      "The current app database contains 9,685 airports, 231 airline profiles, 158 aircraft variants, 60 aircraft families, 11,387 runways and 17,994 radio frequencies.",
+  },
+  {
+    question: "Which simulator versions are supported?",
+    answer:
+      "Pilot Journey is built around Microsoft Flight Simulator 2020 and Microsoft Flight Simulator 2024.",
   },
   {
     question: "When will Pilot Journey be available?",
     answer:
-      "A release date has not been announced. Join the launch list to receive meaningful development and availability updates.",
-  },
-  {
-    question: "How can I join the launch list?",
-    answer:
-      "Enter your email address in the launch access section. The signup service will become active once the mailing backend is connected.",
+      "A public release date has not been announced. Join the launch list for meaningful development and availability updates.",
   },
 ] as const;

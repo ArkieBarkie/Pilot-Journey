@@ -12,23 +12,32 @@ const groups = [
     items: [
       ["Where will I download Pilot Journey?", "Licensed pilots receive the download link and license key by email through Lemon Squeezy."],
       ["Which simulator versions are supported?", "Pilot Journey is being prepared for Microsoft Flight Simulator 2020 and 2024."],
-      ["Can I run the career app on a Mac?", "Yes. The planned Mac setup uses the bridge running alongside Microsoft Flight Simulator on the Windows PC."],
+      ["Can I run the career app on a Mac?", "Yes. Run the Pilot Journey Bridge on the Windows machine with MSFS and use the career console on macOS over the local network."],
     ],
   },
   {
     label: "Simulator connection",
     items: [
-      ["Does Pilot Journey need to run on the flight-sim PC?", "No. A same-PC setup is supported, but a bridge also allows Mac plus Windows and dual-Windows configurations."],
-      ["What happens if the bridge disconnects?", "The final recovery behavior will be documented before release. The goal is to make short network interruptions clear and recoverable."],
-      ["Is SimBrief required?", "No. SimBrief integration supports the OFP workflow, but it is not required for every Pilot Journey operation."],
+      ["Does Pilot Journey need to run on the flight-sim PC?", "No. The same-PC Windows setup uses local SimConnect. The Bridge supports dual-Windows and macOS-plus-Windows configurations."],
+      ["What does live telemetry record?", "Pilot Journey reads position, altitude, speed, fuel, touchdown, overspeed and stall-warning state for tracking, scoring and automatic flight completion."],
+      ["Is SimBrief required?", "No. The complete career loop still works. SimBrief adds the real OFP, schedule, cruise altitude, fuel figures, alternate and filed route."],
     ],
   },
   {
     label: "Career and scoring",
     items: [
-      ["What does the flight score include?", "The debrief considers landing performance, on-time arrival and FOQA-style operating discipline recorded during the flight."],
-      ["Can I fly any aircraft immediately?", "Aircraft access is tied to the career system. Type ratings, licenses and airline opportunities expand as your record develops."],
+      ["What does the flight score include?", "Landing quality contributes 65% and on-time arrival 35% when both are available. Overspeed and stall-warning time can deduct up to 30 points."],
+      ["Does a low score reduce the payout?", "No. The agreed payout is credited in full. The score moves reputation and remains attached to the logbook entry."],
+      ["Can I fly any aircraft immediately?", "No. Nine training tiers, prerequisite licences and aircraft-specific type ratings determine access from single piston through supersonic."],
       ["Is the career saved between sessions?", "Yes. Pilot Journey is designed around a persistent local career record and logbook."],
+    ],
+  },
+  {
+    label: "Airlines and training",
+    items: [
+      ["How do I qualify for an airline?", "Both your pilot level and the prerequisite ratings below the airline's starter tier must pass before you can sign."],
+      ["Can an airline pay for a type rating?", "Signing can grant the operator's starter-fleet rating. It creates a training bond equal to 80% of the tier-unlock cost, which runs down over 30 block hours."],
+      ["Can I switch airlines?", "Yes. Leaving costs a flat $10,000 severance charge plus any remaining training bond. Only one airline contract can be active at a time."],
     ],
   },
   {

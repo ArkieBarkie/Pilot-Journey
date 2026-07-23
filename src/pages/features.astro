@@ -8,38 +8,52 @@ import CalloutCta from "../components/CalloutCta.astro";
 const clusters = [
   {
     number: "01",
-    label: "Contracts and career",
-    title: "A route network with consequences.",
-    copy: "Charter offers, airline rotations and contract mail create a steady flow of work. The flights you accept influence earnings, reputation and the operators that will consider you next.",
-    facts: ["Procedural contract generation", "Airline schedules and tiers", "Persistent logbook and finances"],
+    label: "Operations",
+    title: "Choose the work. Carry the consequence.",
+    copy: "Pick a generated charter contract anywhere in the world or fly an ordered airline rotation with assigned aircraft, deadlines, passengers, payouts and miles.",
+    facts: ["Six-hour charter board refresh", "Sequential airline rotations", "Route map and boarding pass"],
   },
   {
     number: "02",
-    label: "Scoring and FOQA",
-    title: "A debrief that reads the whole flight.",
-    copy: "Pilot Journey scores punctuality, landing performance and operational discipline from live simulator data. Clean procedures matter before touchdown and after it.",
-    facts: ["Landing rate and touchdown quality", "On-time performance", "FOQA-style event tracking"],
+    label: "Live Flight",
+    title: "One briefing from dispatch to parking.",
+    copy: "The active operation keeps route, weather, schedule, fuel, aircraft, flight phase and simulator progress in one place while the flight is underway.",
+    facts: ["SimBrief OFP and filed route", "Live SimConnect telemetry", "Automatic start and completion"],
   },
   {
     number: "03",
-    label: "Simulator integration",
-    title: "Stay connected to the cockpit.",
-    copy: "Fly on the same Windows PC, connect from a second machine or run the desktop career app on Mac through the bridge. SimBrief OFPs keep planning in the same flow.",
-    facts: ["MSFS 2020 and 2024", "Mac and dual-PC bridge", "SimBrief OFP integration"],
+    label: "Scoring and FOQA",
+    title: "A debrief that reads the whole flight.",
+    copy: "The 0–100 score combines landing quality and on-time arrival, then applies any overspeed or stall-warning deduction recorded from the simulator.",
+    facts: ["65% landing component", "35% on-time component", "FOQA deduction capped at 30 points"],
   },
   {
     number: "04",
-    label: "Progression",
+    label: "Career and contracts",
     title: "Earn access, not just points.",
-    copy: "Miles, money, reputation and type ratings shape the next chapter. New fleets and airline tiers arrive because your record supports them.",
-    facts: ["XP and career levels", "Type ratings and licenses", "230+ airline profiles"],
+    copy: "Money, miles, reputation and ratings determine which contracts and airline seats you qualify for. Employment can include a starter rating and a 30-hour training bond.",
+    facts: ["Charter and airline rank ladders", "Level and rating eligibility gates", "231 airline profiles"],
   },
   {
     number: "05",
-    label: "The operating world",
-    title: "Your inbox never feels empty.",
-    copy: "Contracts, training, fleet notices and The World Dispatch give the career a wider operating context. Every message can point to a new decision.",
-    facts: ["Operations mailbox", "Training and maintenance notices", "In-world news desk"],
+    label: "Training and fleet",
+    title: "Climb from single piston to supersonic.",
+    copy: "Nine training tiers, class ratings, aircraft-specific type ratings and a working showroom turn aircraft access into a career decision rather than a dropdown.",
+    facts: ["Nine licence tiers", "158 aircraft variants", "New and used aircraft markets"],
+  },
+  {
+    number: "06",
+    label: "Career record",
+    title: "Every result stays attached to the pilot.",
+    copy: "The logbook, finance ledger and flight-crew profile preserve routes, block time, touchdowns, scores, payouts, licences and career milestones.",
+    facts: ["Persistent flight log", "Complete money ledger", "Ranks from Cadet to Chief Pilot"],
+  },
+  {
+    number: "07",
+    label: "Operating world",
+    title: "A reference world that generates work.",
+    copy: "Search airports, airlines and aircraft as structured records, then use that same world data to generate routes, contracts, fleet requirements and career opportunities.",
+    facts: ["9,685 airports", "11,387 runways", "17,994 radio frequencies"],
   },
 ];
 ---
@@ -60,7 +74,7 @@ const clusters = [
     <div class="container feature-intro">
       <div>
         <Eyebrow label="System overview" />
-        <h2 class="section-title">Five systems. One career record.</h2>
+        <h2 class="section-title">Seven systems. One career record.</h2>
       </div>
       <p class="section-lede">
         Each system gives the next one better context. Your assignment shapes the flight. The flight shapes the
