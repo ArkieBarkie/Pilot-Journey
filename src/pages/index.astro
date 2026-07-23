@@ -4,7 +4,6 @@ import Button from "../components/Button.astro";
 import Eyebrow from "../components/Eyebrow.astro";
 import FaqItem from "../components/FaqItem.astro";
 import LaunchListForm from "../components/LaunchListForm.astro";
-import OperationPlaceholder from "../components/OperationPlaceholder.astro";
 import { withBase } from "../utils/paths";
 import {
   audiences,
@@ -21,6 +20,29 @@ import {
   ratingTiers,
   scoringComponents,
 } from "../data/home";
+
+const operationScreens = {
+  dashboard: {
+    src: "/images/app/dashboard.png",
+    label: "OPERATIONS DASHBOARD",
+    alt: "Actual Pilot Journey dashboard showing an active Vueling flight, wallet, weather and career progression",
+  },
+  "live-flight": {
+    src: "/images/app/live-flight.png",
+    label: "LIVE FLIGHT / VLG3342",
+    alt: "Actual Pilot Journey Live Flight screen showing VLG3342 from Rome to Zakynthos",
+  },
+  inbox: {
+    src: "/images/app/inbox.png",
+    label: "OPERATIONAL INBOX",
+    alt: "Actual Pilot Journey inbox with a filed flight plan and operational messages",
+  },
+  career: {
+    src: "/images/app/career.png",
+    label: "PILOT CAREER RECORD",
+    alt: "Actual Pilot Journey career screen with licence, airline, reputation and flight statistics",
+  },
+} as const;
 ---
 
 <BaseLayout
@@ -65,15 +87,12 @@ import {
 
       <div class="hero-visual" data-hero-visual>
         <div class="app-frame">
-          <div class="window-bar" aria-hidden="true">
-            <div><i></i><i></i><i></i></div>
-            <span>Pilot Journey / Mailbox</span>
-          </div>
+          <span class="capture-badge">Captured in the desktop app</span>
           <img
-            src={withBase("/media/pilot-journey-app.png")}
-            alt="Pilot Journey mailbox with an airline contract offer"
-            width="1600"
-            height="1013"
+            src={withBase("/images/app/dashboard.png")}
+            alt="Actual Pilot Journey dashboard showing an active Vueling flight, wallet, weather and career progression"
+            width="1920"
+            height="1080"
             fetchpriority="high"
           />
         </div>
@@ -173,23 +192,22 @@ import {
       <figure class="console-overview" data-reveal>
         <div class="console-bar">
           <div><i></i><i></i><i></i></div>
-          <span>OPERATIONS CONSOLE / MAILBOX</span>
-          <small>CONNECTED CAREER RECORD</small>
+          <span>OPERATIONS CONSOLE / DASHBOARD</span>
+          <small>ACTUAL APP CAPTURE</small>
         </div>
         <img
-          src={withBase("/media/pilot-journey-app.png")}
-          alt="Pilot Journey operations console showing the operational mailbox"
-          width="1600"
-          height="1013"
+          src={withBase("/images/app/dashboard.png")}
+          alt="Actual Pilot Journey operations dashboard"
+          width="1920"
+          height="1080"
           loading="lazy"
         />
         <figcaption>
-          <span>LIVE PRODUCT VIEW</span>
-          <p>Contract mail, career notices and operational decisions share one environment.</p>
+          <span>CAPTURED IN PILOT JOURNEY</span>
+          <p>Active flight, next rotation, wallet, weather and progression in the running desktop app.</p>
         </figcaption>
       </figure>
 
-      <!-- Product modules use verified content from the current desktop app. -->
       <div class="operation-stories">
         {operationFeatures.map((feature, index) => (
           <article class:list={["operation-story", { "story-reverse": index % 2 === 1 }]} data-reveal>
@@ -205,34 +223,20 @@ import {
             </div>
 
             <div class="story-visual">
-              {
-                feature.visual === "mailbox" || feature.visual === "live-flight" ? (
-                  <figure class="mailbox-window">
-                    <div class="console-bar">
-                      <div><i></i><i></i><i></i></div>
-                      <span>{feature.visual === "mailbox" ? "OPERATIONAL MAILBOX" : "LIVE FLIGHT / VLG3342"}</span>
-                      <small>PRODUCT SCREEN</small>
-                    </div>
-                    <img
-                      src={withBase(
-                        feature.visual === "mailbox"
-                          ? "/media/pilot-journey-app.png"
-                          : "/media/pilot-journey-live-flight.png",
-                      )}
-                      alt={
-                        feature.visual === "mailbox"
-                          ? "Operational mailbox with dispatch, airline, training and finance messages"
-                          : "Live Flight briefing for VLG3342 from Rome to Zakynthos"
-                      }
-                      width={feature.visual === "mailbox" ? "1600" : "1666"}
-                      height={feature.visual === "mailbox" ? "1013" : "1028"}
-                      loading="lazy"
-                    />
-                  </figure>
-                ) : (
-                  <OperationPlaceholder variant={feature.visual} title={feature.title} />
-                )
-              }
+              <figure class="product-capture">
+                <div class="console-bar">
+                  <div><i></i><i></i><i></i></div>
+                  <span>{operationScreens[feature.visual].label}</span>
+                  <small>ACTUAL APP SCREEN</small>
+                </div>
+                <img
+                  src={withBase(operationScreens[feature.visual].src)}
+                  alt={operationScreens[feature.visual].alt}
+                  width="1920"
+                  height="1080"
+                  loading="lazy"
+                />
+              </figure>
             </div>
           </article>
         ))}
@@ -398,14 +402,14 @@ import {
 
       <figure class="network-board" data-reveal>
         <img
-          src={withBase("/media/pilot-journey-live-flight.png")}
+          src={withBase("/images/app/live-flight.png")}
           alt="Pilot Journey Live Flight screen showing VLG3342 from Rome to Zakynthos on a satellite route map"
-          width="1666"
-          height="1028"
+          width="1920"
+          height="1080"
           loading="lazy"
         />
         <figcaption>
-          <span>LIVE PRODUCT VIEW</span>
+          <span>ACTUAL APP CAPTURE</span>
           <small>VLG3342 · LIRF → LGZA · A320ceo</small>
         </figcaption>
       </figure>
@@ -771,6 +775,25 @@ import {
     transform: rotate(0.7deg) translateY(-3px);
   }
 
+  .capture-badge {
+    position: absolute;
+    z-index: 2;
+    top: 16px;
+    right: 16px;
+    padding: 8px 11px;
+    color: var(--color-passport-fg);
+    border: 1px solid rgba(181, 218, 240, 0.34);
+    border-radius: 999px;
+    background: rgba(4, 42, 72, 0.84);
+    box-shadow: 0 12px 28px -18px #00182a;
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+  }
+
   .window-bar,
   .console-bar {
     display: flex;
@@ -820,6 +843,8 @@ import {
   .app-frame img {
     display: block;
     width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
 
   .flight-slip {
@@ -1142,6 +1167,8 @@ import {
   .console-overview > img {
     display: block;
     width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
 
   .console-overview figcaption {
@@ -1257,7 +1284,7 @@ import {
     min-width: 0;
   }
 
-  .mailbox-window {
+  .product-capture {
     margin: 0;
     overflow: hidden;
     border: 1px solid var(--color-border-strong);
@@ -1266,9 +1293,11 @@ import {
     box-shadow: var(--shadow-lift);
   }
 
-  .mailbox-window img {
+  .product-capture img {
     display: block;
     width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
 
   .events-section {
@@ -1760,7 +1789,7 @@ import {
 
   .network-board > img {
     width: 100%;
-    aspect-ratio: 1666 / 1028;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
     object-position: center;
   }
