@@ -1,22 +1,12 @@
 ---
 interface Props {
-  size?: "header" | "ticket";
-  eager?: boolean;
+  size?: "header" | "hero" | "ticket";
 }
 
-const { size = "header", eager = false } = Astro.props;
+const { size = "header" } = Astro.props;
 ---
 
-<span class:list={["brand-icon", `brand-icon-${size}`]} aria-hidden="true">
-  <img
-    src="/media/pilot-journey-logo.png"
-    alt=""
-    width="1920"
-    height="912"
-    loading={eager ? "eager" : "lazy"}
-    fetchpriority={eager ? "high" : "auto"}
-  />
-</span>
+<span class:list={["brand-icon", `brand-icon-${size}`]} aria-hidden="true"></span>
 
 <style>
   .brand-icon {
@@ -26,22 +16,22 @@ const { size = "header", eager = false } = Astro.props;
     aspect-ratio: 1;
     overflow: hidden;
     border: 1px solid rgba(124, 192, 234, 0.42);
-    background: #02182b;
+    background-color: #02182b;
+    background-image: url("/media/pilot-journey-icon.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     box-shadow: var(--shadow-plate);
   }
 
-  img {
-    position: absolute;
-    width: 488%;
-    max-width: none;
-    height: auto;
-    left: -316%;
-    top: -71%;
+  .brand-icon-header {
+    width: 48px;
+    border-radius: 12px;
   }
 
-  .brand-icon-header {
-    width: 44px;
-    border-radius: 12px;
+  .brand-icon-hero {
+    width: 74px;
+    border-radius: 18px;
   }
 
   .brand-icon-ticket {

@@ -1,12 +1,18 @@
 ---
-import BrandLogo from "./BrandLogo.astro";
+import BrandIcon from "./BrandIcon.astro";
 ---
 
 <footer class="site-footer passport-grid">
   <div class="container">
     <div class="footer-main">
       <div class="footer-intro">
-        <BrandLogo size="footer" />
+        <div class="footer-brand">
+          <BrandIcon size="header" />
+          <div>
+            <strong>Pilot Journey</strong>
+            <span>Career operations</span>
+          </div>
+        </div>
         <h2>Career operations are waiting.</h2>
         <p>Fly the contracts. Earn the ratings. Build the career.</p>
       </div>
@@ -56,8 +62,29 @@ import BrandLogo from "./BrandLogo.astro";
     padding-bottom: 68px;
   }
 
-  .footer-intro :global(.brand-logo) {
-    margin-bottom: 20px;
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .footer-brand > div {
+    display: grid;
+    line-height: 1.1;
+  }
+
+  .footer-brand strong {
+    color: var(--color-passport-fg);
+  }
+
+  .footer-brand span {
+    margin-top: 5px;
+    color: var(--color-passport-faint);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
   .footer-intro h2 {
