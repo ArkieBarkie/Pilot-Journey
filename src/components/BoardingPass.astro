@@ -1,4 +1,6 @@
 ---
+import BrandIcon from "./BrandIcon.astro";
+
 interface Props {
   compact?: boolean;
 }
@@ -9,7 +11,7 @@ const { compact = false } = Astro.props;
 <article class:list={["boarding-pass", { compact }]}>
   <div class="pass-main">
     <div class="pass-brand">
-      <span>PJ</span>
+      <BrandIcon size="ticket" />
       <div>
         <strong>Pilot Journey</strong>
         <small>Career flight authority</small>
@@ -69,19 +71,6 @@ const { compact = false } = Astro.props;
     display: flex;
     align-items: center;
     gap: 11px;
-  }
-
-  .pass-brand > span {
-    display: grid;
-    width: 38px;
-    height: 38px;
-    place-items: center;
-    color: var(--color-accent-fg);
-    border-radius: 9px;
-    background: var(--color-accent);
-    font-family: var(--font-mono);
-    font-size: 0.76rem;
-    font-weight: 700;
   }
 
   .pass-brand div {

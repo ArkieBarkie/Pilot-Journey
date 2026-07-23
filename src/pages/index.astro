@@ -5,6 +5,7 @@ import BuyOrNotify from "../components/BuyOrNotify.astro";
 import Eyebrow from "../components/Eyebrow.astro";
 import FeatureTicket from "../components/FeatureTicket.astro";
 import BoardingPass from "../components/BoardingPass.astro";
+import BrandLogo from "../components/BrandLogo.astro";
 
 const features = [
   {
@@ -35,6 +36,10 @@ const features = [
   <section class="hero passport-grid">
     <div class="container hero-grid">
       <div class="hero-copy">
+        <div class="hero-brand">
+          <span class="hero-brand-label">Pilot Journey / Official mark</span>
+          <BrandLogo size="hero" eager />
+        </div>
         <Eyebrow label="Career operations for flight simmers" light />
         <h1>From student pilot to the left seat.</h1>
         <p class="hero-lede">
@@ -62,13 +67,6 @@ const features = [
       </div>
 
       <div class="hero-visual">
-        <img
-          class="hero-logo"
-          src="/media/pilot-journey-logo.png"
-          alt="Pilot Journey logo with an aircraft departing into a red sky"
-          width="1920"
-          height="912"
-        />
         <div class="app-frame">
           <div class="window-bar" aria-hidden="true">
             <div><i></i><i></i><i></i></div>
@@ -253,9 +251,25 @@ const features = [
     max-width: 680px;
     margin: 0;
     color: var(--color-passport-fg);
-    font-size: clamp(3.3rem, 6.7vw, 6.55rem);
-    line-height: 0.88;
+    font-size: clamp(3.15rem, 5.2vw, 5.25rem);
+    line-height: 0.92;
     letter-spacing: -0.068em;
+  }
+
+  .hero-brand {
+    width: min(510px, 100%);
+    margin-bottom: 34px;
+  }
+
+  .hero-brand-label {
+    display: block;
+    margin: 0 0 9px 2px;
+    color: var(--color-passport-faint);
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
   .hero-lede {
@@ -308,22 +322,12 @@ const features = [
     min-height: 560px;
   }
 
-  .hero-logo {
-    position: absolute;
-    z-index: 0;
-    width: 390px;
-    right: 54px;
-    top: -67px;
-    mix-blend-mode: screen;
-    opacity: 0.98;
-  }
-
   .app-frame {
     position: absolute;
     z-index: 1;
     width: min(760px, 110%);
     right: -60px;
-    top: 96px;
+    top: 54px;
     overflow: hidden;
     border: 1px solid rgba(124, 192, 234, 0.34);
     border-radius: 18px;
@@ -673,7 +677,7 @@ const features = [
 
     .hero-visual {
       width: min(100%, 820px);
-      min-height: 610px;
+      min-height: 560px;
       margin-inline: auto;
     }
 
@@ -754,16 +758,10 @@ const features = [
       margin-top: 16px;
     }
 
-    .hero-logo {
-      width: 270px;
-      right: 8px;
-      top: -34px;
-    }
-
     .app-frame {
       width: 112%;
       right: -30px;
-      top: 96px;
+      top: 30px;
     }
 
     .flight-slip {
