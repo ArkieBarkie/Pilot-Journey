@@ -1,12 +1,19 @@
 ---
+import { withBase } from "../utils/paths";
+
 interface Props {
   size?: "header" | "hero" | "ticket";
 }
 
 const { size = "header" } = Astro.props;
+const iconUrl = withBase("/media/pilot-journey-icon.png");
 ---
 
-<span class:list={["brand-icon", `brand-icon-${size}`]} aria-hidden="true"></span>
+<span
+  class:list={["brand-icon", `brand-icon-${size}`]}
+  style={`--brand-icon-url: url("${iconUrl}")`}
+  aria-hidden="true"
+></span>
 
 <style>
   .brand-icon {
@@ -17,7 +24,7 @@ const { size = "header" } = Astro.props;
     overflow: hidden;
     border: 1px solid rgba(124, 192, 234, 0.42);
     background-color: #02182b;
-    background-image: url("/media/pilot-journey-icon.png");
+    background-image: var(--brand-icon-url);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;

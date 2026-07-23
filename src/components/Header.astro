@@ -1,19 +1,22 @@
 ---
 import BrandIcon from "./BrandIcon.astro";
-
-const navItems = [
-  { href: "/features", label: "Features" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/download", label: "Download" },
-  { href: "/support", label: "Support" },
-];
+import { withBase } from "../utils/paths";
 
 const currentPath = Astro.url.pathname;
+const homePath = withBase("/");
+const homePrefix = currentPath === homePath ? "" : homePath;
+const navItems = [
+  { href: `${homePrefix}#operations`, label: "Features", id: "operations" },
+  { href: `${homePrefix}#career`, label: "Career", id: "career" },
+  { href: `${homePrefix}#career-loop`, label: "How it works", id: "career-loop" },
+  { href: `${homePrefix}#launch-access`, label: "Pricing", id: "launch-access" },
+  { href: `${homePrefix}#faq`, label: "FAQ", id: "faq" },
+];
 ---
 
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/" aria-label="Pilot Journey home">
+    <a class="brand" href={homePath} aria-label="Pilot Journey home">
       <BrandIcon size="header" />
       <span class="brand-copy">
         <strong>Pilot Journey</strong>
@@ -21,15 +24,17 @@ const currentPath = Astro.url.pathname;
       </span>
     </a>
 
-    <nav class="desktop-nav" aria-label="Primary navigation">
+    <nav class="desktop-nav" aria-label="Primary navigation" data-primary-nav>
       {navItems.map((item) => (
-        <a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>
+        <a href={item.href} data-nav-section={item.id}>
           {item.label}
         </a>
       ))}
     </nav>
 
-    <a class="header-cta" href="/pricing">Join the launch list <span aria-hidden="true">↗</span></a>
+    <a class="header-cta" href={`${homePrefix}#launch-access`}>
+      Join the launch list <span aria-hidden="true">↗</span>
+    </a>
 
     <details class="mobile-nav">
       <summary aria-label="Open navigation">
@@ -37,28 +42,73 @@ const currentPath = Astro.url.pathname;
       </summary>
       <nav aria-label="Mobile navigation">
         {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
-        <a href="/contact">Contact</a>
+        <a href={`${homePrefix}#launch-access`} class="mobile-cta">Join the launch list</a>
       </nav>
     </details>
   </div>
 </header>
 
+<script>
+  const header = document.querySelector<HTMLElement>(".site-header");
+  const navLinks = document.querySelectorAll<HTMLAnchorElement>("[data-nav-section]");
+  const homepageSections = [...navLinks]
+    .map((link) => {
+      const id = link.dataset.navSection;
+      const section = id ? document.getElementById(id) : null;
+      return { link, section };
+    })
+    .filter((item) => item.section);
+
+  const updateHeader = () => header?.classList.toggle("is-scrolled", window.scrollY > 24);
+  updateHeader();
+  window.addEventListener("scroll", updateHeader, { passive: true });
+
+  if ("IntersectionObserver" in window && homepageSections.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        navLinks.forEach((link) => link.removeAttribute("aria-current"));
+        const active = homepageSections.find((item) => item.section === visible.target);
+        active?.link.setAttribute("aria-current", "location");
+      },
+      { rootMargin: "-22% 0px -66% 0px", threshold: [0, 0.2, 0.5] },
+    );
+    homepageSections.forEach((item) => item.section && observer.observe(item.section));
+  }
+
+  document.querySelectorAll<HTMLAnchorElement>(".mobile-nav a").forEach((link) => {
+    link.addEventListener("click", () => link.closest("details")?.removeAttribute("open"));
+  });
+</script>
+
 <style>
   .site-header {
-    position: absolute;
-    z-index: 20;
+    position: fixed;
+    z-index: 50;
     inset: 0 0 auto;
     height: 80px;
     color: var(--color-passport-fg);
-    border-bottom: 1px solid rgba(52, 95, 129, 0.72);
-    background: rgba(7, 58, 99, 0.93);
+    border-bottom: 1px solid rgba(52, 95, 129, 0.48);
+    background: rgba(5, 42, 73, 0.62);
+    backdrop-filter: blur(12px);
+    transition: height 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  }
+
+  .site-header.is-scrolled {
+    height: 70px;
+    border-color: rgba(52, 95, 129, 0.86);
+    background: rgba(5, 42, 73, 0.96);
+    box-shadow: 0 12px 32px -24px rgba(0, 0, 0, 0.9);
   }
 
   .header-inner {
     display: flex;
     height: 100%;
     align-items: center;
-    gap: 28px;
+    gap: 24px;
   }
 
   .brand {
@@ -91,19 +141,19 @@ const currentPath = Astro.url.pathname;
   .desktop-nav {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 1px;
   }
 
   .desktop-nav a {
-    padding: 8px 11px;
+    padding: 8px 9px;
     color: var(--color-passport-muted);
     border-radius: 8px;
-    font-size: 0.87rem;
+    font-size: 0.83rem;
     font-weight: 600;
   }
 
   .desktop-nav a:hover,
-  .desktop-nav a[aria-current="page"] {
+  .desktop-nav a[aria-current="location"] {
     color: var(--color-passport-fg);
     background: rgba(124, 192, 234, 0.1);
   }
@@ -155,7 +205,7 @@ const currentPath = Astro.url.pathname;
 
   .mobile-nav nav {
     position: absolute;
-    width: 210px;
+    width: min(270px, calc(100vw - 28px));
     right: 0;
     top: 52px;
     display: grid;
@@ -175,7 +225,13 @@ const currentPath = Astro.url.pathname;
     background: rgba(124, 192, 234, 0.1);
   }
 
-  @media (max-width: 850px) {
+  .mobile-nav nav .mobile-cta {
+    margin-top: 6px;
+    color: var(--color-passport-fg);
+    border: 1px solid var(--color-passport-line);
+  }
+
+  @media (max-width: 990px) {
     .desktop-nav,
     .header-cta {
       display: none;
@@ -183,6 +239,12 @@ const currentPath = Astro.url.pathname;
 
     .mobile-nav {
       display: block;
+    }
+  }
+
+  @media (max-width: 460px) {
+    .brand-copy small {
+      display: none;
     }
   }
 </style>

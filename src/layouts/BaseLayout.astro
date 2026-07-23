@@ -7,6 +7,7 @@ import "@fontsource/saira-condensed/700.css";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { withBase } from "../utils/paths";
 
 interface Props {
   title?: string;
@@ -22,6 +23,7 @@ const {
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const socialImage = ogImage ? new URL(ogImage, Astro.site) : undefined;
+const favicon = withBase("/media/pilot-journey-icon.png");
 ---
 
 <!doctype html>
@@ -31,7 +33,7 @@ const socialImage = ogImage ? new URL(ogImage, Astro.site) : undefined;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <link rel="icon" type="image/png" href="/media/pilot-journey-icon.png" />
+    <link rel="icon" type="image/png" href={favicon} />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Pilot Journey" />
@@ -52,6 +54,30 @@ const socialImage = ogImage ? new URL(ogImage, Astro.site) : undefined;
       <slot />
     </main>
     <Footer />
+    <script>
+      const revealItems = document.querySelectorAll<HTMLElement>("[data-reveal]");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!reducedMotion && "IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            });
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+        );
+
+        revealItems.forEach((item) => {
+          item.classList.add("reveal-ready");
+          revealObserver.observe(item);
+        });
+      } else {
+        revealItems.forEach((item) => item.classList.add("is-visible"));
+      }
+    </script>
   </body>
 </html>
 

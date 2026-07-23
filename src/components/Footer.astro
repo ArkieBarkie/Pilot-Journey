@@ -1,5 +1,6 @@
 ---
 import BrandIcon from "./BrandIcon.astro";
+import { withBase } from "../utils/paths";
 ---
 
 <footer class="site-footer passport-grid">
@@ -13,28 +14,28 @@ import BrandIcon from "./BrandIcon.astro";
             <span>Career operations</span>
           </div>
         </div>
-        <h2>Career operations are waiting.</h2>
-        <p>Fly the contracts. Earn the ratings. Build the career.</p>
+        <h2>Build the career behind every flight.</h2>
+        <p>A persistent career operations platform for Microsoft Flight Simulator.</p>
       </div>
 
       <div class="footer-links">
         <div>
           <span>Explore</span>
-          <a href="/features">Features</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/download">Download</a>
+          <a href={withBase("/#features")}>Features</a>
+          <a href={withBase("/#career")}>Career</a>
+          <a href={withBase("/#launch-access")}>Pricing</a>
         </div>
         <div>
           <span>Operations</span>
-          <a href="/support">Support</a>
-          <a href="/contact">Contact</a>
-          <a href="/legal/privacy">Privacy</a>
+          <a href={withBase("/support")}>Support</a>
+          <a href={withBase("/#faq")}>FAQ</a>
+          <a href={withBase("/contact")}>Contact</a>
         </div>
         <div>
           <span>Legal</span>
-          <a href="/legal/eula">EULA</a>
-          <a href="/legal/refund">Refund policy</a>
-          <a href="/legal/terms">Terms</a>
+          <a href={withBase("/legal/privacy")}>Privacy</a>
+          <a href={withBase("/legal/terms")}>Terms</a>
+          <a href={withBase("/legal/eula")}>EULA</a>
         </div>
       </div>
     </div>
@@ -42,8 +43,8 @@ import BrandIcon from "./BrandIcon.astro";
     <div class="footer-base">
       <p>© {new Date().getFullYear()} Pilot Journey. All rights reserved.</p>
       <p>
-        Pilot Journey is an independent product for Microsoft Flight Simulator. Microsoft and Microsoft Flight Simulator
-        are trademarks of the Microsoft group of companies.
+        Pilot Journey is an independent product for Microsoft Flight Simulator. Microsoft and Microsoft Flight
+        Simulator are trademarks of the Microsoft group of companies.
       </p>
     </div>
   </div>
@@ -97,6 +98,7 @@ import BrandIcon from "./BrandIcon.astro";
   }
 
   .footer-intro > p:last-child {
+    max-width: 530px;
     margin: 20px 0 0;
     color: var(--color-passport-muted);
   }

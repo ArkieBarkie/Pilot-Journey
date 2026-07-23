@@ -1,4 +1,6 @@
 ---
+import { withBase } from "../utils/paths";
+
 interface Props {
   index: string;
   title: string;
@@ -19,7 +21,7 @@ const { index, title, copy, meta } = Astro.props;
   </div>
   <h3>{title}</h3>
   <p>{copy}</p>
-  <a href="/features">Review briefing <span aria-hidden="true">↗</span></a>
+  <a href={withBase("/features")}>Review briefing <span aria-hidden="true">↗</span></a>
 </article>
 
 <style>

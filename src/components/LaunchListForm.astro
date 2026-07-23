@@ -1,0 +1,167 @@
+---
+const endpoint = import.meta.env.PUBLIC_LAUNCH_LIST_ENDPOINT ?? "";
+---
+
+<form class="launch-form" data-launch-form data-endpoint={endpoint} novalidate>
+  <label for="launch-email">Email address</label>
+  <div class="launch-form-row">
+    <input
+      id="launch-email"
+      name="email"
+      type="email"
+      inputmode="email"
+      autocomplete="email"
+      placeholder="pilot@example.com"
+      aria-describedby="launch-form-message launch-form-note"
+      required
+    />
+    <button class="button button-primary" type="submit">
+      <span data-submit-label>Join the launch list</span>
+      <span aria-hidden="true">↗</span>
+    </button>
+  </div>
+  <p id="launch-form-message" class="form-message" data-form-message aria-live="polite"></p>
+  <p id="launch-form-note" class="form-note">No spam. Only meaningful Pilot Journey updates.</p>
+</form>
+
+<script>
+  const forms = document.querySelectorAll<HTMLFormElement>("[data-launch-form]");
+
+  forms.forEach((form) => {
+    const input = form.querySelector<HTMLInputElement>('input[type="email"]');
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const label = form.querySelector<HTMLElement>("[data-submit-label]");
+    const message = form.querySelector<HTMLElement>("[data-form-message]");
+    const endpoint = form.dataset.endpoint ?? "";
+
+    const setState = (state: "idle" | "loading" | "success" | "error", text = "") => {
+      form.dataset.state = state;
+      if (message) message.textContent = text;
+      if (button) button.disabled = state === "loading" || state === "success";
+      if (label) {
+        label.textContent =
+          state === "loading" ? "Filing request…" : state === "success" ? "You are on the list" : "Join the launch list";
+      }
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!input || !input.validity.valid) {
+        input?.focus();
+        setState("error", "Enter a valid email address to continue.");
+        return;
+      }
+
+      if (!endpoint) {
+        setState(
+          "error",
+          "Launch-list registration is being connected. Please try again when access opens.",
+        );
+        return;
+      }
+
+      setState("loading", "Filing your launch request…");
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: input.value.trim(), source: "marketing-site" }),
+        });
+
+        if (!response.ok) throw new Error("Launch-list endpoint returned an error.");
+
+        setState("success", "Request received. Watch your inbox for Pilot Journey updates.");
+        input.value = "";
+      } catch {
+        setState("error", "We could not file your request. Please try again later.");
+      }
+    });
+
+    input?.addEventListener("input", () => {
+      if (form.dataset.state === "error") setState("idle");
+    });
+  });
+</script>
+
+<style>
+  .launch-form {
+    width: min(100%, 650px);
+  }
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--color-passport-muted);
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .launch-form-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+  }
+
+  input {
+    width: 100%;
+    min-height: 52px;
+    padding: 0 16px;
+    color: var(--color-passport-fg);
+    border: 1px solid var(--color-passport-line);
+    border-radius: 10px;
+    outline: 0;
+    background: rgba(2, 29, 52, 0.62);
+  }
+
+  input::placeholder {
+    color: var(--color-passport-faint);
+  }
+
+  input:focus {
+    border-color: var(--color-passport-accent);
+    box-shadow: 0 0 0 3px rgba(124, 192, 234, 0.16);
+  }
+
+  .button:disabled {
+    cursor: wait;
+    opacity: 0.68;
+    transform: none;
+  }
+
+  .form-message,
+  .form-note {
+    margin: 10px 0 0;
+    font-size: 0.78rem;
+  }
+
+  .form-message {
+    min-height: 1.25em;
+    color: var(--color-passport-muted);
+  }
+
+  .form-note {
+    color: var(--color-passport-faint);
+  }
+
+  [data-state="error"] .form-message {
+    color: #ff9bad;
+  }
+
+  [data-state="success"] .form-message {
+    color: #8dddb9;
+  }
+
+  @media (max-width: 580px) {
+    .launch-form-row {
+      grid-template-columns: 1fr;
+    }
+
+    .button {
+      width: 100%;
+    }
+  }
+</style>
