@@ -1,0 +1,21 @@
+{
+  "name": "pilot-journey-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "latest",
+    "@astrojs/sitemap": "latest",
+    "@fontsource-variable/space-grotesk": "latest",
+    "@fontsource/saira-condensed": "latest",
+    "@fontsource/space-mono": "latest",
+    "@tailwindcss/vite": "latest",
+    "astro": "latest",
+    "tailwindcss": "latest"
+  }
+}
