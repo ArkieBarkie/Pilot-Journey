@@ -1,0 +1,258 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Eyebrow from "../components/Eyebrow.astro";
+
+const requestedSubject = Astro.url.searchParams.get("subject") ?? "";
+---
+
+<BaseLayout
+  title="Contact | Pilot Journey"
+  description="Contact the Pilot Journey operations desk for product, purchase or technical support."
+>
+  <PageHero
+    eyebrow="Operations desk / Contact"
+    title="Send a message to operations."
+    lede="Include your simulator version, computer setup and the exact step you were taking. Clear details help us respond faster."
+  />
+
+  <section class="section">
+    <div class="container contact-layout">
+      <div class="contact-aside">
+        <Eyebrow label="Direct channel" />
+        <h2 class="section-title">We read every dispatch.</h2>
+        <p class="section-lede">
+          The form is being connected during the backend phase. Until then, email the support desk directly.
+        </p>
+        <a class="email-ticket" href="mailto:support@thepilotjourney.com">
+          <span class="mono-label">Support address</span>
+          <strong>support@thepilotjourney.com</strong>
+          <i aria-hidden="true">↗</i>
+        </a>
+        <div class="response-note">
+          <span>Suggested details</span>
+          <ul>
+            <li>Microsoft Flight Simulator version</li>
+            <li>Windows, Mac or dual-PC setup</li>
+            <li>Error message or unexpected result</li>
+          </ul>
+        </div>
+      </div>
+
+      <form class="contact-form" action="mailto:support@thepilotjourney.com" method="post" enctype="text/plain">
+        <div class="form-head passport-grid">
+          <span>MESSAGE FORM / PJ OPS</span>
+          <strong>OPEN</strong>
+        </div>
+        <div class="form-body">
+          <div class="field-row">
+            <label>
+              <span>Name</span>
+              <input type="text" name="name" autocomplete="name" required placeholder="Your name" />
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" autocomplete="email" required placeholder="pilot@example.com" />
+            </label>
+          </div>
+          <label>
+            <span>Subject</span>
+            <select name="subject" required>
+              <option value="">Choose a subject</option>
+              <option value="Launch notification" selected={requestedSubject === "Launch notification"}>Launch notification</option>
+              <option value="Technical support">Technical support</option>
+              <option value="Purchase and license">Purchase and license</option>
+              <option value="General question">General question</option>
+            </select>
+          </label>
+          <label>
+            <span>Message</span>
+            <textarea name="message" rows="7" required placeholder="Describe the operation and what you need help with."></textarea>
+          </label>
+          <div class="form-footer">
+            <p>Submitting opens your default email app with these details.</p>
+            <button class="button button-primary" type="submit">Send to operations <span aria-hidden="true">↗</span></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-layout {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.75fr) minmax(0, 1.25fr);
+    gap: 84px;
+    align-items: start;
+  }
+
+  .email-ticket {
+    position: relative;
+    display: grid;
+    gap: 6px;
+    margin-top: 34px;
+    padding: 20px 54px 20px 20px;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    background: var(--color-elevated);
+    box-shadow: var(--shadow-paper);
+  }
+
+  .email-ticket strong {
+    color: var(--color-accent-bright);
+    word-break: break-word;
+  }
+
+  .email-ticket i {
+    position: absolute;
+    right: 20px;
+    top: calc(50% - 12px);
+    color: var(--color-accent);
+    font-style: normal;
+  }
+
+  .response-note {
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border-strong);
+  }
+
+  .response-note > span {
+    color: var(--color-fg-strong);
+    font-family: var(--font-mono);
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .response-note ul {
+    margin: 14px 0 0;
+    padding-left: 20px;
+    color: var(--color-fg-muted);
+    font-size: 0.88rem;
+  }
+
+  .contact-form {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    background: var(--color-elevated);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .form-head {
+    display: flex;
+    min-height: 82px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px;
+    border-bottom: 1px dashed var(--color-passport-line);
+  }
+
+  .form-head span,
+  .form-head strong {
+    color: var(--color-passport-muted);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+  }
+
+  .form-head strong {
+    color: var(--color-success-fg);
+  }
+
+  .form-body {
+    display: grid;
+    gap: 20px;
+    padding: 30px;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  label {
+    display: grid;
+    gap: 8px;
+  }
+
+  label > span {
+    color: var(--color-fg-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.61rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    color: var(--color-fg-strong);
+    border: 1px solid var(--color-border-strong);
+    border-radius: 10px;
+    background: var(--color-surface);
+  }
+
+  input,
+  select {
+    height: 48px;
+    padding: 0 14px;
+  }
+
+  textarea {
+    padding: 12px 14px;
+    resize: vertical;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--color-ocean-300);
+    outline: 2px solid var(--color-ocean-100);
+  }
+
+  .form-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 8px;
+  }
+
+  .form-footer p {
+    max-width: 280px;
+    margin: 0;
+    color: var(--color-fg-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.57rem;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 850px) {
+    .contact-layout {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .field-row {
+      grid-template-columns: 1fr;
+    }
+
+    .form-body {
+      padding: 24px 20px;
+    }
+
+    .form-footer {
+      align-items: stretch;
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,204 @@
+---
+const navItems = [
+  { href: "/features", label: "Features" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/download", label: "Download" },
+  { href: "/support", label: "Support" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="Pilot Journey home">
+      <span class="brand-mark" aria-hidden="true"><span></span></span>
+      <span class="brand-copy">
+        <strong>Pilot Journey</strong>
+        <small>Career operations</small>
+      </span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      {navItems.map((item) => (
+        <a href={item.href} aria-current={currentPath === item.href ? "page" : undefined}>
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <a class="header-cta" href="/pricing">Join the launch list <span aria-hidden="true">↗</span></a>
+
+    <details class="mobile-nav">
+      <summary aria-label="Open navigation">
+        <span></span><span></span>
+      </summary>
+      <nav aria-label="Mobile navigation">
+        {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
+        <a href="/contact">Contact</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: absolute;
+    z-index: 20;
+    inset: 0 0 auto;
+    height: 80px;
+    color: var(--color-passport-fg);
+    border-bottom: 1px solid rgba(52, 95, 129, 0.72);
+    background: rgba(7, 58, 99, 0.93);
+  }
+
+  .header-inner {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    margin-right: auto;
+  }
+
+  .brand-mark {
+    position: relative;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border: 1px solid rgba(124, 192, 234, 0.55);
+    border-radius: 10px;
+    background: var(--color-accent);
+    box-shadow: var(--shadow-plate);
+  }
+
+  .brand-mark span {
+    width: 13px;
+    height: 13px;
+    border: 2px solid var(--color-accent-fg);
+    transform: rotate(45deg);
+  }
+
+  .brand-copy {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+  }
+
+  .brand-copy strong {
+    font-size: 0.93rem;
+  }
+
+  .brand-copy small {
+    margin-top: 5px;
+    color: var(--color-passport-muted);
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .desktop-nav a {
+    padding: 8px 11px;
+    color: var(--color-passport-muted);
+    border-radius: 8px;
+    font-size: 0.87rem;
+    font-weight: 600;
+  }
+
+  .desktop-nav a:hover,
+  .desktop-nav a[aria-current="page"] {
+    color: var(--color-passport-fg);
+    background: rgba(124, 192, 234, 0.1);
+  }
+
+  .header-cta {
+    display: inline-flex;
+    height: 40px;
+    align-items: center;
+    gap: 9px;
+    padding: 0 14px;
+    color: var(--color-passport-fg);
+    border: 1px solid var(--color-passport-line);
+    border-radius: 9px;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .header-cta span {
+    color: var(--color-passport-accent);
+  }
+
+  .mobile-nav {
+    display: none;
+    position: relative;
+  }
+
+  .mobile-nav summary {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    padding: 12px 10px;
+    list-style: none;
+    align-content: center;
+    gap: 6px;
+    border: 1px solid var(--color-passport-line);
+    border-radius: 9px;
+    cursor: pointer;
+  }
+
+  .mobile-nav summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-nav summary span {
+    display: block;
+    height: 2px;
+    background: var(--color-passport-fg);
+  }
+
+  .mobile-nav nav {
+    position: absolute;
+    width: 210px;
+    right: 0;
+    top: 52px;
+    display: grid;
+    padding: 10px;
+    border: 1px solid var(--color-passport-line);
+    border-radius: 12px;
+    background: var(--color-passport);
+    box-shadow: var(--shadow-plate);
+  }
+
+  .mobile-nav nav a {
+    padding: 10px 12px;
+    border-radius: 8px;
+  }
+
+  .mobile-nav nav a:hover {
+    background: rgba(124, 192, 234, 0.1);
+  }
+
+  @media (max-width: 850px) {
+    .desktop-nav,
+    .header-cta {
+      display: none;
+    }
+
+    .mobile-nav {
+      display: block;
+    }
+  }
+</style>

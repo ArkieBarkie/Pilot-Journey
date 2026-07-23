@@ -1,0 +1,74 @@
+---
+import "@fontsource-variable/space-grotesk";
+import "@fontsource/space-mono/400.css";
+import "@fontsource/space-mono/700.css";
+import "@fontsource/saira-condensed/600.css";
+import "@fontsource/saira-condensed/700.css";
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = "Pilot Journey | Build your career in the sky",
+  description = "A desktop career experience for Microsoft Flight Simulator. Fly contracts, earn ratings and progress from student pilot to the left seat.",
+  ogImage,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const socialImage = ogImage ? new URL(ogImage, Astro.site) : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Pilot Journey" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    <meta name="twitter:card" content={socialImage ? "summary_large_image" : "summary"} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: fixed;
+    z-index: 100;
+    top: 12px;
+    left: 12px;
+    padding: 10px 14px;
+    color: var(--color-passport-fg);
+    border-radius: 8px;
+    background: var(--color-accent-bright);
+    transform: translateY(-160%);
+    transition: transform 150ms ease;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+</style>

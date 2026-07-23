@@ -1,0 +1,21 @@
+---
+import Button from "./Button.astro";
+
+interface Props {
+  variant?: "primary" | "ghost";
+}
+
+const { variant = "primary" } = Astro.props;
+const salesEnabled = import.meta.env.PUBLIC_SALES_ENABLED === "true";
+const checkoutUrl = import.meta.env.PUBLIC_LEMONSQUEEZY_CHECKOUT_URL;
+---
+
+{
+  salesEnabled && checkoutUrl ? (
+    <a class:list={["button", `button-${variant}`, "lemonsqueezy-button"]} href={checkoutUrl}>
+      Buy Pilot Journey <span aria-hidden="true">↗</span>
+    </a>
+  ) : (
+    <Button href="/contact?subject=Launch%20notification" variant={variant} arrow>Join the launch list</Button>
+  )
+}

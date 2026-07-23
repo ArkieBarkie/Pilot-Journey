@@ -1,0 +1,311 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Button from "../components/Button.astro";
+import Eyebrow from "../components/Eyebrow.astro";
+import CalloutCta from "../components/CalloutCta.astro";
+
+const clusters = [
+  {
+    number: "01",
+    label: "Contracts and career",
+    title: "A route network with consequences.",
+    copy: "Charter offers, airline rotations and contract mail create a steady flow of work. The flights you accept influence earnings, reputation and the operators that will consider you next.",
+    facts: ["Procedural contract generation", "Airline schedules and tiers", "Persistent logbook and finances"],
+  },
+  {
+    number: "02",
+    label: "Scoring and FOQA",
+    title: "A debrief that reads the whole flight.",
+    copy: "Pilot Journey scores punctuality, landing performance and operational discipline from live simulator data. Clean procedures matter before touchdown and after it.",
+    facts: ["Landing rate and touchdown quality", "On-time performance", "FOQA-style event tracking"],
+  },
+  {
+    number: "03",
+    label: "Simulator integration",
+    title: "Stay connected to the cockpit.",
+    copy: "Fly on the same Windows PC, connect from a second machine or run the desktop career app on Mac through the bridge. SimBrief OFPs keep planning in the same flow.",
+    facts: ["MSFS 2020 and 2024", "Mac and dual-PC bridge", "SimBrief OFP integration"],
+  },
+  {
+    number: "04",
+    label: "Progression",
+    title: "Earn access, not just points.",
+    copy: "Miles, money, reputation and type ratings shape the next chapter. New fleets and airline tiers arrive because your record supports them.",
+    facts: ["XP and career levels", "Type ratings and licenses", "230+ airline profiles"],
+  },
+  {
+    number: "05",
+    label: "The operating world",
+    title: "Your inbox never feels empty.",
+    copy: "Contracts, training, fleet notices and The World Dispatch give the career a wider operating context. Every message can point to a new decision.",
+    facts: ["Operations mailbox", "Training and maintenance notices", "In-world news desk"],
+  },
+];
+---
+
+<BaseLayout
+  title="Features | Pilot Journey"
+  description="Contracts, live telemetry, FOQA-style scoring, type ratings and a connected career for Microsoft Flight Simulator."
+>
+  <PageHero
+    eyebrow="Operations manual / Features"
+    title="Everything in the career stays connected."
+    lede="From dispatch to debrief, Pilot Journey turns individual simulator flights into one continuous operating record."
+  >
+    <Button href="/pricing" variant="primary">Join the launch list</Button>
+  </PageHero>
+
+  <section class="section">
+    <div class="container feature-intro">
+      <div>
+        <Eyebrow label="System overview" />
+        <h2 class="section-title">Five systems. One career record.</h2>
+      </div>
+      <p class="section-lede">
+        Each system gives the next one better context. Your assignment shapes the flight. The flight shapes the
+        debrief. The debrief shapes what becomes available next.
+      </p>
+    </div>
+
+    <div class="container cluster-list">
+      {clusters.map((cluster, index) => (
+        <article class:list={["cluster-card", { reverse: index % 2 !== 0 }]}>
+          <div class="cluster-visual">
+            <span class="cluster-number">{cluster.number}</span>
+            <div class="radar" aria-hidden="true"><i></i><b></b></div>
+            <div class="cluster-stamp">
+              <small>System status</small>
+              <strong>ACTIVE</strong>
+            </div>
+          </div>
+          <div class="cluster-copy">
+            <Eyebrow label={cluster.label} />
+            <h2>{cluster.title}</h2>
+            <p>{cluster.copy}</p>
+            <ul>
+              {cluster.facts.map((fact) => <li><span aria-hidden="true">✓</span>{fact}</li>)}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <CalloutCta
+    eyebrow="Next assignment"
+    title="Your operation starts with one flight."
+    copy="Join the launch list and receive the release briefing when Pilot Journey is ready for boarding."
+    secondaryHref="/download"
+    secondaryLabel="Check compatibility"
+  />
+</BaseLayout>
+
+<style>
+  .feature-intro {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    gap: 80px;
+    align-items: end;
+  }
+
+  .cluster-list {
+    display: grid;
+    gap: 30px;
+    margin-top: 62px;
+  }
+
+  .cluster-card {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.8fr) minmax(0, 1.2fr);
+    min-height: 440px;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    background: var(--color-elevated);
+    box-shadow: var(--shadow-paper);
+  }
+
+  .cluster-card.reverse {
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  }
+
+  .cluster-card.reverse .cluster-visual {
+    order: 2;
+  }
+
+  .cluster-visual {
+    position: relative;
+    min-height: 340px;
+    overflow: hidden;
+    border-right: 1px dashed var(--color-tear);
+    background:
+      linear-gradient(rgba(124, 192, 234, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124, 192, 234, 0.08) 1px, transparent 1px),
+      var(--color-passport);
+    background-size: 28px 28px;
+  }
+
+  .reverse .cluster-visual {
+    border-right: 0;
+    border-left: 1px dashed var(--color-tear);
+  }
+
+  .cluster-number {
+    position: absolute;
+    top: 28px;
+    left: 30px;
+    color: var(--color-passport-accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .radar {
+    position: absolute;
+    width: 255px;
+    height: 255px;
+    left: calc(50% - 128px);
+    top: calc(50% - 130px);
+    border: 1px solid var(--color-passport-line);
+    border-radius: 50%;
+    box-shadow:
+      0 0 0 42px rgba(124, 192, 234, 0.04),
+      0 0 0 84px rgba(124, 192, 234, 0.025);
+  }
+
+  .radar::before,
+  .radar::after {
+    position: absolute;
+    content: "";
+    background: var(--color-passport-line);
+  }
+
+  .radar::before {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+  }
+
+  .radar::after {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+  }
+
+  .radar i {
+    position: absolute;
+    width: 44%;
+    height: 2px;
+    left: 50%;
+    top: 50%;
+    background: var(--color-passport-accent);
+    transform: rotate(-28deg);
+    transform-origin: left center;
+  }
+
+  .radar b {
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    right: 49px;
+    top: 77px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    box-shadow: 0 0 0 7px rgba(14, 111, 184, 0.2);
+  }
+
+  .cluster-stamp {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    display: grid;
+    padding: 11px 14px;
+    border: 1px solid var(--color-passport-line);
+    border-radius: 9px;
+    background: rgba(7, 58, 99, 0.72);
+  }
+
+  .cluster-stamp small {
+    color: var(--color-passport-faint);
+    font-family: var(--font-mono);
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .cluster-stamp strong {
+    color: var(--color-success-fg);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .cluster-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(36px, 6vw, 72px);
+  }
+
+  .cluster-copy h2 {
+    margin: 0;
+    color: var(--color-fg-strong);
+    font-size: clamp(2rem, 4vw, 3.35rem);
+    line-height: 1.02;
+    letter-spacing: -0.048em;
+  }
+
+  .cluster-copy > p {
+    max-width: 650px;
+    margin: 20px 0 28px;
+    color: var(--color-fg-muted);
+  }
+
+  .cluster-copy ul {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cluster-copy li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-fg-strong);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .cluster-copy li span {
+    display: grid;
+    width: 20px;
+    height: 20px;
+    place-items: center;
+    color: var(--color-success-bright);
+    border-radius: 6px;
+    background: var(--color-success-fg);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+  }
+
+  @media (max-width: 850px) {
+    .feature-intro,
+    .cluster-card,
+    .cluster-card.reverse {
+      grid-template-columns: 1fr;
+    }
+
+    .cluster-card.reverse .cluster-visual {
+      order: 0;
+    }
+
+    .cluster-visual,
+    .reverse .cluster-visual {
+      border: 0;
+      border-bottom: 1px dashed var(--color-tear);
+    }
+  }
+</style>

@@ -1,0 +1,162 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import Eyebrow from "../components/Eyebrow.astro";
+---
+
+<BaseLayout
+  title="Off course | Pilot Journey"
+  description="The requested Pilot Journey route could not be found."
+>
+  <section class="lost-page passport-grid">
+    <div class="container lost-grid">
+      <div>
+        <Eyebrow label="Navigation alert / 404" light />
+        <span class="lost-code airport-code">OFF COURSE</span>
+        <h1>That route is not in the flight plan.</h1>
+        <p>The requested page may have moved, or the destination code was entered incorrectly.</p>
+        <div class="button-row">
+          <Button href="/" variant="primary">Return to operations</Button>
+          <Button href="/support" variant="ghost">Open support</Button>
+        </div>
+      </div>
+
+      <div class="radar-card" aria-hidden="true">
+        <div class="radar"><i></i><b></b></div>
+        <div class="radar-data">
+          <span>ROUTE STATUS</span>
+          <strong>NOT FOUND</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lost-page {
+    min-height: 820px;
+    padding: 160px 0 100px;
+    display: grid;
+    align-items: center;
+  }
+
+  .lost-grid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 90px;
+    align-items: center;
+  }
+
+  .lost-code {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--color-passport-accent);
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 0.9;
+  }
+
+  h1 {
+    max-width: 720px;
+    margin: 0;
+    color: var(--color-passport-fg);
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    line-height: 0.92;
+    letter-spacing: -0.06em;
+  }
+
+  p {
+    max-width: 600px;
+    margin: 24px 0 32px;
+    color: var(--color-passport-muted);
+  }
+
+  .radar-card {
+    display: grid;
+    min-height: 470px;
+    place-items: center;
+    padding: 32px;
+    border: 1px solid var(--color-passport-line);
+    border-radius: 22px;
+    background: rgba(7, 58, 99, 0.65);
+    box-shadow: var(--shadow-plate);
+  }
+
+  .radar {
+    position: relative;
+    width: 290px;
+    height: 290px;
+    border: 1px solid var(--color-passport-line);
+    border-radius: 50%;
+    box-shadow:
+      inset 0 0 0 48px rgba(124, 192, 234, 0.025),
+      inset 0 0 0 96px rgba(124, 192, 234, 0.025);
+  }
+
+  .radar::before,
+  .radar::after {
+    position: absolute;
+    content: "";
+    background: var(--color-passport-line);
+  }
+
+  .radar::before {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+  }
+
+  .radar::after {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+  }
+
+  .radar i {
+    position: absolute;
+    width: 43%;
+    height: 2px;
+    left: 50%;
+    top: 50%;
+    background: var(--color-danger);
+    transform: rotate(28deg);
+    transform-origin: left center;
+  }
+
+  .radar b {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    right: 44px;
+    bottom: 75px;
+    border-radius: 50%;
+    background: var(--color-danger);
+    box-shadow: 0 0 0 8px rgba(194, 58, 87, 0.18);
+  }
+
+  .radar-data {
+    display: grid;
+    text-align: center;
+    font-family: var(--font-mono);
+  }
+
+  .radar-data span {
+    color: var(--color-passport-faint);
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+  }
+
+  .radar-data strong {
+    color: var(--color-danger);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 850px) {
+    .lost-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .radar-card {
+      max-width: 420px;
+    }
+  }
+</style>

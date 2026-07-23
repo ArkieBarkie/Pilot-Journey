@@ -1,0 +1,26 @@
+---
+import Eyebrow from "./Eyebrow.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  lede: string;
+}
+
+const { eyebrow, title, lede } = Astro.props;
+---
+
+<section class="page-hero passport-grid">
+  <div class="container">
+    <Eyebrow label={eyebrow} light />
+    <h1 class="display-title">{title}</h1>
+    <p class="section-lede">{lede}</p>
+    <div class="page-actions"><slot /></div>
+  </div>
+</section>
+
+<style>
+  .page-actions:not(:empty) {
+    margin-top: 30px;
+  }
+</style>

@@ -1,0 +1,793 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Button from "../components/Button.astro";
+import BuyOrNotify from "../components/BuyOrNotify.astro";
+import Eyebrow from "../components/Eyebrow.astro";
+import FeatureTicket from "../components/FeatureTicket.astro";
+import BoardingPass from "../components/BoardingPass.astro";
+
+const features = [
+  {
+    index: "01",
+    meta: "Dispatch",
+    title: "Contracts with a destination",
+    copy: "Accept charter work, join airline schedules and build a career shaped by the flights you choose.",
+  },
+  {
+    index: "02",
+    meta: "Flight ops",
+    title: "Every flight is observed",
+    copy: "Live simulator telemetry tracks punctuality, landing quality and FOQA-style operating discipline.",
+  },
+  {
+    index: "03",
+    meta: "Career",
+    title: "Progress you can read",
+    copy: "Earn Miles, money, reputation, type ratings and access to higher airline tiers.",
+  },
+];
+---
+
+<BaseLayout
+  title="Pilot Journey | From student pilot to the left seat"
+  description="Fly contracts, earn ratings and build a persistent career for Microsoft Flight Simulator."
+>
+  <section class="hero passport-grid">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <Eyebrow label="Career operations for flight simmers" light />
+        <h1>From student pilot to the left seat.</h1>
+        <p class="hero-lede">
+          Fly the contracts. Earn the ratings. Build a persistent career for Microsoft Flight Simulator.
+        </p>
+        <div class="button-row">
+          <BuyOrNotify />
+          <Button href="/features" variant="ghost">Review the operation</Button>
+        </div>
+
+        <div class="hero-manifest" aria-label="Product coverage">
+          <div>
+            <span>Aircraft profiles</span>
+            <strong>150+</strong>
+          </div>
+          <div>
+            <span>Airline network</span>
+            <strong>230+</strong>
+          </div>
+          <div>
+            <span>Simulator support</span>
+            <strong>2020 / 2024</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <img
+          class="hero-logo"
+          src="/media/pilot-journey-logo.png"
+          alt="Pilot Journey logo with an aircraft departing into a red sky"
+          width="1920"
+          height="912"
+        />
+        <div class="app-frame">
+          <div class="window-bar" aria-hidden="true">
+            <div><i></i><i></i><i></i></div>
+            <span>Pilot Journey / Mailbox</span>
+          </div>
+          <img
+            src="/media/pilot-journey-app.png"
+            alt="Pilot Journey app mailbox showing a first officer contract offer"
+            width="1600"
+            height="1013"
+          />
+        </div>
+        <div class="flight-slip" aria-hidden="true">
+          <span>Next operation</span>
+          <div>
+            <strong class="airport-code">KORD</strong>
+            <i>→</i>
+            <strong class="airport-code">KACY</strong>
+          </div>
+          <small>Flight NKS943 · Assigned</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section intro-section">
+    <div class="container">
+      <div class="intro-heading">
+        <div>
+          <Eyebrow label="Mission profile" />
+          <h2 class="section-title">Your logbook becomes a career.</h2>
+        </div>
+        <p class="section-lede">
+          Pilot Journey turns each simulator session into part of a larger operation. Dispatch, aircraft,
+          performance and progression stay connected from one flight to the next.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        {features.map((feature) => <FeatureTicket {...feature} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section workflow-section">
+    <div class="container">
+      <div class="workflow-shell paper-panel">
+        <div class="workflow-copy">
+          <Eyebrow label="Standard operating sequence" />
+          <h2 class="section-title">Brief. Fly. Advance.</h2>
+          <p class="section-lede">
+            The loop is simple. The career behind it keeps getting deeper.
+          </p>
+          <Button href="/features" variant="secondary" arrow>See the full feature set</Button>
+        </div>
+
+        <ol class="workflow-steps">
+          <li>
+            <span>01</span>
+            <div>
+              <h3>Accept the assignment</h3>
+              <p>Choose a charter or airline rotation, review the route and prepare the OFP.</p>
+            </div>
+          </li>
+          <li>
+            <span>02</span>
+            <div>
+              <h3>Fly in your simulator</h3>
+              <p>Live telemetry follows the operation without taking you out of the cockpit.</p>
+            </div>
+          </li>
+          <li>
+            <span>03</span>
+            <div>
+              <h3>Receive the debrief</h3>
+              <p>Landing, timing and flight discipline feed your score, reputation and next opportunity.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section operations-section">
+    <div class="container operations-grid">
+      <div class="app-showcase">
+        <div class="app-showcase-head">
+          <span>OPS CONSOLE</span>
+          <span>LIVE SYSTEM</span>
+        </div>
+        <img
+          src="/media/pilot-journey-app.png"
+          alt="Pilot Journey operations console with mailbox and contract detail"
+          loading="lazy"
+          width="1600"
+          height="1013"
+        />
+      </div>
+
+      <div class="operations-copy">
+        <Eyebrow label="One connected operation" />
+        <h2 class="section-title">The world keeps moving between flights.</h2>
+        <p class="section-lede">
+          Contract mail, airline schedules, maintenance, training and the World Dispatch give each decision context.
+          Your next flight is not an isolated score. It is another line in the operation.
+        </p>
+
+        <div class="operations-list">
+          <div><span>INTEGRATION</span><strong>SimBrief OFP workflow</strong></div>
+          <div><span>CONNECTIVITY</span><strong>Same PC, dual PC or Mac bridge</strong></div>
+          <div><span>DEBRIEF</span><strong>Landing, timing and FOQA discipline</strong></div>
+          <div><span>CAREER</span><strong>Ratings, licenses and airline tiers</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section manifest-section">
+    <div class="container manifest-grid">
+      <div>
+        <Eyebrow label="Career manifest" />
+        <h2 class="section-title">Built for the long haul.</h2>
+      </div>
+      <div class="manifest-stats">
+        <article>
+          <span>Aircraft types</span>
+          <strong>150+</strong>
+          <p>From training aircraft to long-haul fleets.</p>
+        </article>
+        <article>
+          <span>Airlines</span>
+          <strong>230+</strong>
+          <p>Progress through operators, fleets and career tiers.</p>
+        </article>
+        <article>
+          <span>Career record</span>
+          <strong>01</strong>
+          <p>One connected history across every completed operation.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section final-cta">
+    <div class="container cta-grid">
+      <div class="cta-copy">
+        <Eyebrow label="Boarding begins soon" />
+        <h2 class="section-title">Your first assignment is waiting.</h2>
+        <p class="section-lede">
+          Join the launch list for release updates, system requirements and first access.
+        </p>
+        <div class="button-row">
+          <BuyOrNotify />
+          <Button href="/download" variant="secondary">Check your setup</Button>
+        </div>
+      </div>
+      <BoardingPass compact />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    min-height: 780px;
+    padding: 140px 0 74px;
+    border-bottom: 1px solid var(--color-passport-line);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(560px, 1.15fr);
+    gap: 62px;
+    align-items: center;
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero h1 {
+    max-width: 680px;
+    margin: 0;
+    color: var(--color-passport-fg);
+    font-size: clamp(3.3rem, 6.7vw, 6.55rem);
+    line-height: 0.88;
+    letter-spacing: -0.068em;
+  }
+
+  .hero-lede {
+    max-width: 590px;
+    margin: 28px 0;
+    color: var(--color-passport-muted);
+    font-size: clamp(1.05rem, 1.6vw, 1.28rem);
+  }
+
+  .hero-manifest {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 50px;
+    padding-top: 22px;
+    border-top: 1px solid var(--color-passport-line);
+  }
+
+  .hero-manifest div {
+    display: grid;
+    gap: 4px;
+    padding: 0 18px;
+    border-right: 1px solid var(--color-passport-line);
+  }
+
+  .hero-manifest div:first-child {
+    padding-left: 0;
+  }
+
+  .hero-manifest div:last-child {
+    border-right: 0;
+  }
+
+  .hero-manifest span {
+    color: var(--color-passport-faint);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .hero-manifest strong {
+    color: var(--color-passport-fg);
+    font-family: var(--font-mono);
+    font-size: 0.87rem;
+  }
+
+  .hero-visual {
+    position: relative;
+    min-height: 560px;
+  }
+
+  .hero-logo {
+    position: absolute;
+    z-index: 0;
+    width: 390px;
+    right: 54px;
+    top: -67px;
+    mix-blend-mode: screen;
+    opacity: 0.98;
+  }
+
+  .app-frame {
+    position: absolute;
+    z-index: 1;
+    width: min(760px, 110%);
+    right: -60px;
+    top: 96px;
+    overflow: hidden;
+    border: 1px solid rgba(124, 192, 234, 0.34);
+    border-radius: 18px;
+    background: var(--color-elevated);
+    box-shadow: 0 34px 80px -30px rgba(0, 20, 38, 0.85);
+    transform: rotate(1.35deg);
+  }
+
+  .window-bar {
+    display: flex;
+    height: 36px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    color: var(--color-fg-subtle);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-elevated);
+    font-family: var(--font-mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .window-bar div {
+    display: flex;
+    gap: 5px;
+  }
+
+  .window-bar i {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-border-strong);
+  }
+
+  .window-bar i:first-child {
+    background: var(--color-danger);
+  }
+
+  .window-bar i:nth-child(2) {
+    background: var(--color-warning);
+  }
+
+  .window-bar i:last-child {
+    background: var(--color-success);
+  }
+
+  .app-frame img {
+    display: block;
+    width: 100%;
+  }
+
+  .flight-slip {
+    position: absolute;
+    z-index: 3;
+    right: -6px;
+    bottom: 2px;
+    width: 270px;
+    padding: 17px 20px;
+    color: var(--color-fg-body);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    background: var(--color-elevated);
+    box-shadow: var(--shadow-lift);
+    transform: rotate(-2deg);
+  }
+
+  .flight-slip > span,
+  .flight-slip small {
+    color: var(--color-fg-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .flight-slip div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 4px 0 2px;
+  }
+
+  .flight-slip strong {
+    color: var(--color-fg-strong);
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+
+  .flight-slip i {
+    color: var(--color-accent);
+    font-style: normal;
+  }
+
+  .intro-heading {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    gap: 80px;
+    align-items: end;
+  }
+
+  .intro-heading .section-lede {
+    margin-bottom: 3px;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 54px;
+  }
+
+  .workflow-section {
+    padding-top: 20px;
+  }
+
+  .workflow-shell {
+    display: grid;
+    grid-template-columns: minmax(310px, 0.76fr) minmax(0, 1.24fr);
+    overflow: hidden;
+  }
+
+  .workflow-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 52px;
+    border-right: 1px dashed var(--color-tear);
+    background: var(--color-elevated);
+  }
+
+  .workflow-copy .button {
+    margin-top: 30px;
+  }
+
+  .workflow-steps {
+    margin: 0;
+    padding: 28px 46px;
+    list-style: none;
+    counter-reset: steps;
+  }
+
+  .workflow-steps li {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    gap: 24px;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .workflow-steps li:last-child {
+    border-bottom: 0;
+  }
+
+  .workflow-steps > li > span {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    color: var(--color-accent-bright);
+    border: 1px solid var(--color-ocean-100);
+    border-radius: 10px;
+    background: var(--color-ocean-50);
+    font-family: var(--font-mono);
+    font-size: 0.73rem;
+    font-weight: 700;
+  }
+
+  .workflow-steps h3 {
+    margin: 0;
+    color: var(--color-fg-strong);
+    font-size: 1.08rem;
+  }
+
+  .workflow-steps p {
+    margin: 6px 0 0;
+    color: var(--color-fg-muted);
+    font-size: 0.9rem;
+  }
+
+  .operations-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .operations-section::before {
+    position: absolute;
+    width: 480px;
+    height: 480px;
+    left: -280px;
+    top: 120px;
+    content: "";
+    border: 1px solid var(--color-border-strong);
+    border-radius: 50%;
+  }
+
+  .operations-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+    gap: 80px;
+    align-items: center;
+  }
+
+  .app-showcase {
+    overflow: hidden;
+    border: 1px solid var(--color-passport-line);
+    border-radius: 18px;
+    background: var(--color-passport);
+    box-shadow: var(--shadow-plate);
+    transform: rotate(-1deg);
+  }
+
+  .app-showcase-head {
+    display: flex;
+    height: 42px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 17px;
+    color: var(--color-passport-muted);
+    border-bottom: 1px solid var(--color-passport-line);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+  }
+
+  .app-showcase-head span:last-child {
+    color: var(--color-success-fg);
+  }
+
+  .app-showcase img {
+    display: block;
+    width: 100%;
+  }
+
+  .operations-copy .section-lede {
+    margin-bottom: 34px;
+  }
+
+  .operations-list {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--color-border-strong);
+  }
+
+  .operations-list div {
+    display: grid;
+    grid-template-columns: 112px 1fr;
+    gap: 18px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .operations-list span {
+    color: var(--color-fg-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.09em;
+  }
+
+  .operations-list strong {
+    color: var(--color-fg-strong);
+    font-size: 0.88rem;
+  }
+
+  .manifest-section {
+    border-block: 1px solid var(--color-border-strong);
+    background: var(--color-elevated-strong);
+  }
+
+  .manifest-grid {
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .manifest-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--color-border);
+    box-shadow: var(--shadow-paper);
+  }
+
+  .manifest-stats article {
+    min-height: 230px;
+    padding: 26px 24px;
+    background: var(--color-elevated);
+  }
+
+  .manifest-stats span {
+    display: block;
+    color: var(--color-fg-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .manifest-stats strong {
+    display: block;
+    margin: 18px 0 38px;
+    color: var(--color-accent-bright);
+    font-family: var(--font-mono);
+    font-size: 2.6rem;
+    line-height: 1;
+  }
+
+  .manifest-stats p {
+    margin: 0;
+    color: var(--color-fg-muted);
+    font-size: 0.85rem;
+  }
+
+  .final-cta {
+    background: var(--color-surface);
+  }
+
+  .cta-grid {
+    display: grid;
+    grid-template-columns: minmax(320px, 0.72fr) minmax(560px, 1.28fr);
+    gap: 76px;
+    align-items: center;
+  }
+
+  .cta-copy .section-lede {
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 1080px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero {
+      padding-bottom: 96px;
+    }
+
+    .hero-copy {
+      max-width: 760px;
+    }
+
+    .hero-visual {
+      width: min(100%, 820px);
+      min-height: 610px;
+      margin-inline: auto;
+    }
+
+    .app-frame {
+      right: 0;
+      width: 96%;
+    }
+
+    .cta-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+
+  @media (max-width: 850px) {
+    .intro-heading,
+    .workflow-shell,
+    .operations-grid,
+    .manifest-grid {
+      grid-template-columns: 1fr;
+      gap: 44px;
+    }
+
+    .feature-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .workflow-copy {
+      border-right: 0;
+      border-bottom: 1px dashed var(--color-tear);
+    }
+
+    .operations-grid {
+      gap: 56px;
+    }
+
+    .manifest-stats {
+      grid-template-columns: 1fr;
+    }
+
+    .manifest-stats article {
+      min-height: auto;
+    }
+
+    .manifest-stats strong {
+      margin-bottom: 20px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .hero {
+      min-height: auto;
+      padding-top: 126px;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.25rem, 17vw, 5rem);
+    }
+
+    .hero-manifest {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .hero-manifest div,
+    .hero-manifest div:first-child {
+      padding: 0 0 12px;
+      border-right: 0;
+      border-bottom: 1px solid var(--color-passport-line);
+    }
+
+    .hero-manifest div:last-child {
+      border-bottom: 0;
+    }
+
+    .hero-visual {
+      min-height: 430px;
+      margin-top: 16px;
+    }
+
+    .hero-logo {
+      width: 270px;
+      right: 8px;
+      top: -34px;
+    }
+
+    .app-frame {
+      width: 112%;
+      right: -30px;
+      top: 96px;
+    }
+
+    .flight-slip {
+      width: 232px;
+      right: 4px;
+      bottom: -4px;
+    }
+
+    .workflow-copy {
+      padding: 34px 26px;
+    }
+
+    .workflow-steps {
+      padding: 18px 24px;
+    }
+
+    .workflow-steps li {
+      grid-template-columns: 42px 1fr;
+      gap: 16px;
+    }
+
+    .operations-list div {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+  }
+</style>

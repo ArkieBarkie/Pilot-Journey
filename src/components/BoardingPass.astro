@@ -1,0 +1,299 @@
+---
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<article class:list={["boarding-pass", { compact }]}>
+  <div class="pass-main">
+    <div class="pass-brand">
+      <span>PJ</span>
+      <div>
+        <strong>Pilot Journey</strong>
+        <small>Career flight authority</small>
+      </div>
+    </div>
+
+    <div class="pass-route">
+      <div>
+        <span>Departure</span>
+        <strong class="airport-code">EHAM</strong>
+        <small>Student pilot</small>
+      </div>
+      <div class="route-line" aria-hidden="true"><i></i></div>
+      <div>
+        <span>Destination</span>
+        <strong class="airport-code">KJFK</strong>
+        <small>Left seat</small>
+      </div>
+    </div>
+
+    <div class="pass-data">
+      <div><span>Operation</span><strong>CAREER</strong></div>
+      <div><span>Sequence</span><strong>001</strong></div>
+      <div><span>Status</span><strong class="accent-value">OPEN</strong></div>
+    </div>
+  </div>
+
+  <div class="perforation" aria-hidden="true"><i></i></div>
+
+  <div class="pass-stub">
+    <span class="stub-label">Boarding group</span>
+    <strong>CAPT</strong>
+    <div class="barcode" aria-hidden="true"></div>
+    <small>PJ 2026 001</small>
+  </div>
+</article>
+
+<style>
+  .boarding-pass {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 150px;
+    overflow: hidden;
+    color: var(--color-fg-body);
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    background: var(--color-elevated);
+    box-shadow: var(--shadow-ticket);
+  }
+
+  .pass-main {
+    min-width: 0;
+    padding: 25px 28px 24px;
+  }
+
+  .pass-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+
+  .pass-brand > span {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    color: var(--color-accent-fg);
+    border-radius: 9px;
+    background: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    font-weight: 700;
+  }
+
+  .pass-brand div {
+    display: grid;
+  }
+
+  .pass-brand strong {
+    color: var(--color-fg-strong);
+    font-size: 0.88rem;
+  }
+
+  .pass-brand small,
+  .pass-route span,
+  .pass-route small,
+  .pass-data span,
+  .stub-label,
+  .pass-stub small {
+    color: var(--color-fg-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .pass-route {
+    display: grid;
+    grid-template-columns: auto minmax(60px, 1fr) auto;
+    align-items: center;
+    gap: 16px;
+    margin: 30px 0 24px;
+  }
+
+  .pass-route > div:not(.route-line) {
+    display: grid;
+  }
+
+  .pass-route > div:last-child {
+    text-align: right;
+  }
+
+  .pass-route strong {
+    color: var(--color-fg-strong);
+    font-size: clamp(2rem, 4vw, 3.15rem);
+    line-height: 0.9;
+  }
+
+  .route-line {
+    position: relative;
+    height: 1px;
+    background: var(--color-border-strong);
+  }
+
+  .route-line::before,
+  .route-line::after {
+    position: absolute;
+    top: -3px;
+    width: 7px;
+    height: 7px;
+    content: "";
+    border: 2px solid var(--color-accent);
+    border-radius: 50%;
+    background: var(--color-elevated);
+  }
+
+  .route-line::before {
+    left: 0;
+  }
+
+  .route-line::after {
+    right: 0;
+  }
+
+  .route-line i {
+    position: absolute;
+    width: 32px;
+    height: 8px;
+    top: -4px;
+    left: calc(50% - 16px);
+    border-top: 3px solid var(--color-accent);
+    border-radius: 50%;
+  }
+
+  .pass-data {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .pass-data div {
+    display: grid;
+  }
+
+  .pass-data strong {
+    color: var(--color-fg-strong);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+  }
+
+  .pass-data .accent-value {
+    color: var(--color-success-bright);
+  }
+
+  .perforation {
+    position: relative;
+    width: 1px;
+    border-left: 1px dashed var(--color-tear);
+  }
+
+  .perforation::before,
+  .perforation::after {
+    position: absolute;
+    z-index: 2;
+    left: -11px;
+    width: 20px;
+    height: 20px;
+    content: "";
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    background: var(--color-canvas);
+  }
+
+  .perforation::before {
+    top: -11px;
+  }
+
+  .perforation::after {
+    bottom: -11px;
+  }
+
+  .pass-stub {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 18px;
+    background: var(--color-surface);
+    text-align: center;
+  }
+
+  .pass-stub > strong {
+    margin: 6px 0 18px;
+    color: var(--color-accent-bright);
+    font-family: var(--font-code);
+    font-size: 2.15rem;
+    line-height: 1;
+  }
+
+  .barcode {
+    width: 82px;
+    height: 44px;
+    margin-bottom: 10px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--color-fg-strong) 0 2px,
+      transparent 2px 5px,
+      var(--color-fg-strong) 5px 6px,
+      transparent 6px 9px
+    );
+  }
+
+  .compact .pass-route {
+    margin-top: 22px;
+  }
+
+  @media (max-width: 620px) {
+    .boarding-pass {
+      grid-template-columns: 1fr;
+    }
+
+    .perforation {
+      width: auto;
+      height: 1px;
+      border-left: 0;
+      border-top: 1px dashed var(--color-tear);
+    }
+
+    .perforation::before,
+    .perforation::after {
+      top: -10px;
+      bottom: auto;
+    }
+
+    .perforation::before {
+      left: -11px;
+    }
+
+    .perforation::after {
+      right: -11px;
+      left: auto;
+    }
+
+    .pass-stub {
+      min-height: 116px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 16px;
+      text-align: left;
+    }
+
+    .pass-stub > strong {
+      margin: 0;
+    }
+
+    .barcode {
+      height: 48px;
+      margin: 0;
+    }
+
+    .pass-stub small {
+      display: none;
+    }
+  }
+</style>

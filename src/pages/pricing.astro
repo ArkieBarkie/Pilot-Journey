@@ -1,0 +1,210 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import BuyOrNotify from "../components/BuyOrNotify.astro";
+import Button from "../components/Button.astro";
+import BoardingPass from "../components/BoardingPass.astro";
+import FaqItem from "../components/FaqItem.astro";
+import Eyebrow from "../components/Eyebrow.astro";
+---
+
+<BaseLayout
+  title="Pricing | Pilot Journey"
+  description="Join the Pilot Journey launch list. Final pricing and release details will be published before departure."
+>
+  <PageHero
+    eyebrow="Passenger manifest / Pricing"
+    title="One career. Every flight."
+    lede="Final launch pricing will be filed before release. Join the list now and receive the complete purchase briefing first."
+  >
+    <BuyOrNotify />
+  </PageHero>
+
+  <section class="section">
+    <div class="container price-grid">
+      <div class="price-copy">
+        <Eyebrow label="Launch package" />
+        <h2 class="section-title">A complete career operation.</h2>
+        <p class="section-lede">
+          Pilot Journey is planned as a desktop software purchase with license delivery and downloads handled through
+          Lemon Squeezy.
+        </p>
+        <ul class="included-list">
+          <li><span>01</span>Full career and contract system</li>
+          <li><span>02</span>Live simulator connection and scoring</li>
+          <li><span>03</span>Mac and dual-PC bridge support</li>
+          <li><span>04</span>Aircraft, airline and progression database</li>
+          <li><span>05</span>Release updates included in the launch terms</li>
+        </ul>
+      </div>
+
+      <div class="price-card">
+        <div class="price-card-head passport-grid">
+          <span>FARE CLASS</span>
+          <strong>CAREER</strong>
+        </div>
+        <div class="price-body">
+          <span class="mono-label">Launch price</span>
+          <strong class="price">TBA</strong>
+          <p>Final price, currency and activation terms will be announced before sales open.</p>
+          <BuyOrNotify />
+          <small>Secure checkout and license delivery through Lemon Squeezy.</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="container ticket-wrap">
+      <BoardingPass />
+    </div>
+  </section>
+
+  <section class="section faq-section">
+    <div class="container faq-grid">
+      <div>
+        <Eyebrow label="Purchase briefing" />
+        <h2 class="section-title">Questions before boarding.</h2>
+      </div>
+      <div class="faq-list">
+        <FaqItem question="Is Pilot Journey a subscription?">
+          <p>The final commercial terms are still being prepared. The launch package is currently planned as desktop software rather than a recurring service.</p>
+        </FaqItem>
+        <FaqItem question="How many computers can I activate?">
+          <p>The final activation allowance will be confirmed before release. The current plan is designed to support a normal same-PC or dual-PC simulator setup.</p>
+        </FaqItem>
+        <FaqItem question="How will I receive the app?">
+          <p>After purchase, Lemon Squeezy will deliver the license key and download details by email.</p>
+        </FaqItem>
+        <FaqItem question="Can I request a refund?">
+          <p>Refund eligibility will follow the published refund policy shown during checkout. Review the final policy before purchase.</p>
+        </FaqItem>
+        <Button href="/support" variant="secondary" arrow>Read all support answers</Button>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .price-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 420px;
+    gap: 90px;
+    align-items: start;
+  }
+
+  .included-list {
+    display: grid;
+    gap: 0;
+    margin: 38px 0 0;
+    padding: 0;
+    border-top: 1px solid var(--color-border-strong);
+    list-style: none;
+  }
+
+  .included-list li {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 16px;
+    align-items: center;
+    padding: 14px 0;
+    color: var(--color-fg-strong);
+    border-bottom: 1px solid var(--color-border);
+    font-weight: 600;
+  }
+
+  .included-list span {
+    color: var(--color-accent-bright);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+  }
+
+  .price-card {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    background: var(--color-elevated);
+    box-shadow: var(--shadow-ticket);
+  }
+
+  .price-card-head {
+    display: flex;
+    height: 90px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 26px;
+    border-bottom: 1px dashed var(--color-passport-line);
+  }
+
+  .price-card-head span {
+    color: var(--color-passport-muted);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+  }
+
+  .price-card-head strong {
+    color: var(--color-passport-fg);
+    font-family: var(--font-code);
+    font-size: 2rem;
+  }
+
+  .price-body {
+    display: flex;
+    min-height: 410px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 34px 28px;
+  }
+
+  .price {
+    margin: 10px 0 20px;
+    color: var(--color-fg-strong);
+    font-family: var(--font-mono);
+    font-size: 4.4rem;
+    line-height: 1;
+  }
+
+  .price-body p {
+    margin: 0 0 32px;
+    color: var(--color-fg-muted);
+  }
+
+  .price-body small {
+    margin-top: auto;
+    padding-top: 28px;
+    color: var(--color-fg-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    line-height: 1.6;
+  }
+
+  .ticket-wrap {
+    margin-top: 86px;
+  }
+
+  .faq-section {
+    border-top: 1px solid var(--color-border-strong);
+    background: var(--color-surface);
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 0.72fr 1.28fr;
+    gap: 86px;
+  }
+
+  .faq-list .button {
+    margin-top: 32px;
+  }
+
+  @media (max-width: 850px) {
+    .price-grid,
+    .faq-grid {
+      grid-template-columns: 1fr;
+      gap: 52px;
+    }
+
+    .price-card {
+      max-width: 520px;
+    }
+  }
+</style>

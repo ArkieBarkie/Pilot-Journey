@@ -1,0 +1,176 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Button from "../components/Button.astro";
+import Eyebrow from "../components/Eyebrow.astro";
+import FaqItem from "../components/FaqItem.astro";
+import CalloutCta from "../components/CalloutCta.astro";
+
+const groups = [
+  {
+    label: "Installation",
+    items: [
+      ["Where will I download Pilot Journey?", "Licensed pilots receive the download link and license key by email through Lemon Squeezy."],
+      ["Which simulator versions are supported?", "Pilot Journey is being prepared for Microsoft Flight Simulator 2020 and 2024."],
+      ["Can I run the career app on a Mac?", "Yes. The planned Mac setup uses the bridge running alongside Microsoft Flight Simulator on the Windows PC."],
+    ],
+  },
+  {
+    label: "Simulator connection",
+    items: [
+      ["Does Pilot Journey need to run on the flight-sim PC?", "No. A same-PC setup is supported, but a bridge also allows Mac plus Windows and dual-Windows configurations."],
+      ["What happens if the bridge disconnects?", "The final recovery behavior will be documented before release. The goal is to make short network interruptions clear and recoverable."],
+      ["Is SimBrief required?", "No. SimBrief integration supports the OFP workflow, but it is not required for every Pilot Journey operation."],
+    ],
+  },
+  {
+    label: "Career and scoring",
+    items: [
+      ["What does the flight score include?", "The debrief considers landing performance, on-time arrival and FOQA-style operating discipline recorded during the flight."],
+      ["Can I fly any aircraft immediately?", "Aircraft access is tied to the career system. Type ratings, licenses and airline opportunities expand as your record develops."],
+      ["Is the career saved between sessions?", "Yes. Pilot Journey is designed around a persistent local career record and logbook."],
+    ],
+  },
+  {
+    label: "Purchase and license",
+    items: [
+      ["Is pricing final?", "Not yet. The final price, currency, license terms and activation allowance will be announced before sales open."],
+      ["Who processes the payment?", "Checkout, tax handling, license delivery and the download email are managed by Lemon Squeezy."],
+      ["Where can I read the refund policy?", "The current placeholder is available on the refund policy page. Final terms will be published before checkout opens."],
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Support and FAQ | Pilot Journey"
+  description="Answers about installation, simulator connection, career scoring, purchase and licensing."
+>
+  <PageHero
+    eyebrow="Operations desk / Support"
+    title="Find the answer. Return to flight."
+    lede="Review the current briefings for installation, simulator connection, career scoring and licensing."
+  >
+    <Button href="/contact" variant="primary">Contact operations</Button>
+  </PageHero>
+
+  <section class="section">
+    <div class="container support-layout">
+      <aside class="support-index">
+        <span class="mono-label">Briefing sections</span>
+        {groups.map((group, index) => <a href={`#group-${index + 1}`}>{String(index + 1).padStart(2, "0")} / {group.label}</a>)}
+        <div class="support-note">
+          <span>Still grounded?</span>
+          <p>Send the operations desk a message with your setup and the step that failed.</p>
+          <Button href="/contact" variant="secondary">Open contact form</Button>
+        </div>
+      </aside>
+
+      <div class="support-groups">
+        {groups.map((group, index) => (
+          <section id={`group-${index + 1}`} class="faq-group">
+            <Eyebrow label={`${String(index + 1).padStart(2, "0")} / ${group.label}`} />
+            <div class="faq-panel">
+              {group.items.map(([question, answer]) => (
+                <FaqItem question={question}><p>{answer}</p></FaqItem>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CalloutCta
+    eyebrow="Operations desk"
+    title="Need a direct answer?"
+    copy="Send your setup, simulator version and a clear description of what happened. Support will use that information to review the operation."
+    secondaryHref="/contact"
+    secondaryLabel="Contact support"
+  />
+</BaseLayout>
+
+<style>
+  .support-layout {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 86px;
+    align-items: start;
+  }
+
+  .support-index {
+    position: sticky;
+    top: 30px;
+    display: grid;
+    gap: 0;
+  }
+
+  .support-index > .mono-label {
+    margin-bottom: 14px;
+  }
+
+  .support-index > a {
+    padding: 12px 0;
+    color: var(--color-fg-muted);
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.88rem;
+    font-weight: 600;
+  }
+
+  .support-index > a:hover {
+    color: var(--color-accent-bright);
+  }
+
+  .support-note {
+    margin-top: 34px;
+    padding: 22px;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    background: var(--color-elevated);
+    box-shadow: var(--shadow-paper);
+  }
+
+  .support-note span {
+    color: var(--color-fg-strong);
+    font-weight: 700;
+  }
+
+  .support-note p {
+    margin: 8px 0 18px;
+    color: var(--color-fg-muted);
+    font-size: 0.84rem;
+  }
+
+  .support-note .button {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .support-groups {
+    display: grid;
+    gap: 72px;
+  }
+
+  .faq-group {
+    scroll-margin-top: 32px;
+  }
+
+  .faq-panel {
+    padding: 0 28px;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-elevated);
+    box-shadow: var(--shadow-paper);
+  }
+
+  @media (max-width: 850px) {
+    .support-layout {
+      grid-template-columns: 1fr;
+      gap: 58px;
+    }
+
+    .support-index {
+      position: static;
+    }
+  }
+</style>

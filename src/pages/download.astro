@@ -1,0 +1,344 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Button from "../components/Button.astro";
+import Eyebrow from "../components/Eyebrow.astro";
+import CalloutCta from "../components/CalloutCta.astro";
+
+const modes = [
+  {
+    code: "WIN-01",
+    title: "Same-PC Windows",
+    copy: "Run Pilot Journey and Microsoft Flight Simulator on the same Windows PC. The direct connection handles live flight data.",
+  },
+  {
+    code: "BRG-02",
+    title: "Mac plus Windows",
+    copy: "Run the career app on Mac while the bridge relays simulator telemetry from the Windows flight-sim PC.",
+  },
+  {
+    code: "NET-03",
+    title: "Dual-PC Windows",
+    copy: "Keep the career console on a second Windows machine and connect through the same lightweight bridge.",
+  },
+];
+---
+
+<BaseLayout
+  title="Download and system requirements | Pilot Journey"
+  description="Review simulator compatibility, system requirements and connection modes for Pilot Journey."
+>
+  <PageHero
+    eyebrow="Ground operations / Download"
+    title="Prepare your simulator setup."
+    lede="Release downloads will be delivered to licensed pilots by email. Review the planned connection modes and compatibility below."
+  >
+    <Button href="/contact?subject=Launch%20notification" variant="primary">Notify me at release</Button>
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <div class="requirements-head">
+        <div>
+          <Eyebrow label="Compatibility sheet" />
+          <h2 class="section-title">System requirements.</h2>
+        </div>
+        <p class="section-lede">Final minimum specifications will be confirmed after release-candidate testing.</p>
+      </div>
+
+      <div class="requirements-grid">
+        <article>
+          <span class="mono-label">Simulator</span>
+          <strong>Microsoft Flight Simulator</strong>
+          <div class="spec-row"><span>Edition</span><b>2020 / 2024</b></div>
+          <div class="spec-row"><span>Connection</span><b>Live telemetry</b></div>
+          <div class="spec-row"><span>Planning</span><b>SimBrief optional</b></div>
+        </article>
+        <article>
+          <span class="mono-label">Desktop app</span>
+          <strong>Windows or macOS</strong>
+          <div class="spec-row"><span>Windows</span><b>Primary support</b></div>
+          <div class="spec-row"><span>macOS</span><b>Via bridge</b></div>
+          <div class="spec-row"><span>Internet</span><b>Setup and services</b></div>
+        </article>
+        <article>
+          <span class="mono-label">Delivery</span>
+          <strong>License email</strong>
+          <div class="spec-row"><span>Provider</span><b>Lemon Squeezy</b></div>
+          <div class="spec-row"><span>Contents</span><b>Key and download</b></div>
+          <div class="spec-row"><span>Status</span><b class="status">Pre-release</b></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section modes-section">
+    <div class="container modes-layout">
+      <div class="modes-copy">
+        <Eyebrow label="Connection modes" />
+        <h2 class="section-title">Keep the console where it belongs.</h2>
+        <p class="section-lede">
+          Choose the setup that fits your cockpit. The bridge keeps simulator telemetry moving to Pilot Journey
+          without forcing every app onto one machine.
+        </p>
+      </div>
+      <div class="mode-list">
+        {modes.map((mode) => (
+          <article>
+            <span>{mode.code}</span>
+            <div>
+              <h3>{mode.title}</h3>
+              <p>{mode.copy}</p>
+            </div>
+            <i aria-hidden="true">→</i>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section delivery-section">
+    <div class="container delivery-grid">
+      <div class="delivery-ticket">
+        <div class="delivery-head passport-grid">
+          <span>POST-PURCHASE DELIVERY</span>
+          <strong>LICENSED</strong>
+        </div>
+        <div class="delivery-body">
+          <div><span>01</span><p>Complete checkout through the secure Lemon Squeezy overlay.</p></div>
+          <div><span>02</span><p>Open the delivery email containing your license key and download link.</p></div>
+          <div><span>03</span><p>Install Pilot Journey, activate the license and connect your simulator.</p></div>
+        </div>
+      </div>
+      <div>
+        <Eyebrow label="After purchase" />
+        <h2 class="section-title">Your key and installer arrive together.</h2>
+        <p class="section-lede">
+          Keep the delivery email for future downloads and activation details. Support can help if the message does not
+          arrive or the installer cannot connect.
+        </p>
+        <Button href="/support" variant="secondary" arrow>Open support</Button>
+      </div>
+    </div>
+  </section>
+
+  <CalloutCta
+    eyebrow="Release notice"
+    title="Get the download briefing first."
+    copy="Join the launch list for final requirements, release timing and purchase access."
+    secondaryHref="/support"
+    secondaryLabel="Read support FAQ"
+  />
+</BaseLayout>
+
+<style>
+  .requirements-head {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    gap: 80px;
+    align-items: end;
+  }
+
+  .requirements-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 52px;
+  }
+
+  .requirements-grid article {
+    min-height: 360px;
+    padding: 28px 26px;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-elevated);
+    box-shadow: var(--shadow-paper);
+  }
+
+  .requirements-grid article > strong {
+    display: block;
+    min-height: 86px;
+    margin: 18px 0 26px;
+    color: var(--color-fg-strong);
+    font-size: 1.45rem;
+    line-height: 1.2;
+  }
+
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 11px 0;
+    border-top: 1px solid var(--color-border);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+  }
+
+  .spec-row span {
+    color: var(--color-fg-subtle);
+    text-transform: uppercase;
+  }
+
+  .spec-row b {
+    color: var(--color-fg-strong);
+    text-align: right;
+  }
+
+  .spec-row .status {
+    color: var(--color-warning);
+  }
+
+  .modes-section {
+    border-block: 1px solid var(--color-border-strong);
+    background: var(--color-elevated-strong);
+  }
+
+  .modes-layout {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 90px;
+    align-items: start;
+  }
+
+  .mode-list {
+    display: grid;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    background: var(--color-border);
+    box-shadow: var(--shadow-paper);
+    gap: 1px;
+  }
+
+  .mode-list article {
+    display: grid;
+    grid-template-columns: 76px 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 27px 28px;
+    background: var(--color-elevated);
+  }
+
+  .mode-list article > span {
+    color: var(--color-accent-bright);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+  }
+
+  .mode-list h3 {
+    margin: 0;
+    color: var(--color-fg-strong);
+    font-size: 1.08rem;
+  }
+
+  .mode-list p {
+    margin: 5px 0 0;
+    color: var(--color-fg-muted);
+    font-size: 0.87rem;
+  }
+
+  .mode-list i {
+    color: var(--color-accent);
+    font-style: normal;
+  }
+
+  .delivery-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
+    gap: 80px;
+    align-items: center;
+  }
+
+  .delivery-ticket {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    background: var(--color-elevated);
+    box-shadow: var(--shadow-ticket);
+  }
+
+  .delivery-head {
+    display: flex;
+    min-height: 86px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px;
+    border-bottom: 1px dashed var(--color-passport-line);
+  }
+
+  .delivery-head span,
+  .delivery-head strong {
+    color: var(--color-passport-muted);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.11em;
+  }
+
+  .delivery-head strong {
+    color: var(--color-success-fg);
+  }
+
+  .delivery-body {
+    display: grid;
+    gap: 0;
+    padding: 18px 28px;
+  }
+
+  .delivery-body div {
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    gap: 18px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .delivery-body div:last-child {
+    border-bottom: 0;
+  }
+
+  .delivery-body span {
+    color: var(--color-accent-bright);
+    font-family: var(--font-mono);
+    font-size: 0.67rem;
+    font-weight: 700;
+  }
+
+  .delivery-body p {
+    margin: 0;
+    color: var(--color-fg-muted);
+    font-size: 0.9rem;
+  }
+
+  .delivery-grid .button {
+    margin-top: 30px;
+  }
+
+  @media (max-width: 850px) {
+    .requirements-head,
+    .modes-layout,
+    .delivery-grid {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+
+    .requirements-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .requirements-grid article {
+      min-height: auto;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .mode-list article {
+      grid-template-columns: 1fr auto;
+      gap: 10px 18px;
+    }
+
+    .mode-list article > span {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

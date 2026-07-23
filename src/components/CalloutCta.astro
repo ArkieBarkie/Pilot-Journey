@@ -1,0 +1,77 @@
+---
+import BuyOrNotify from "./BuyOrNotify.astro";
+import Button from "./Button.astro";
+import Eyebrow from "./Eyebrow.astro";
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  copy: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+
+const {
+  eyebrow = "Ready for departure",
+  title,
+  copy,
+  secondaryHref = "/features",
+  secondaryLabel = "Explore features",
+} = Astro.props;
+---
+
+<section class="section callout">
+  <div class="container">
+    <div class="callout-card passport-grid">
+      <div>
+        <Eyebrow label={eyebrow} light />
+        <h2>{title}</h2>
+        <p>{copy}</p>
+      </div>
+      <div class="button-row">
+        <BuyOrNotify />
+        <Button href={secondaryHref} variant="ghost">{secondaryLabel}</Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .callout {
+    background: var(--color-surface);
+  }
+
+  .callout-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 60px;
+    align-items: center;
+    padding: 48px;
+    border: 1px solid var(--color-passport-line);
+    border-radius: 18px;
+    box-shadow: var(--shadow-plate);
+  }
+
+  h2 {
+    max-width: 700px;
+    margin: 0;
+    color: var(--color-passport-fg);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+  }
+
+  p {
+    max-width: 680px;
+    margin: 18px 0 0;
+    color: var(--color-passport-muted);
+  }
+
+  @media (max-width: 760px) {
+    .callout-card {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding: 32px 24px;
+    }
+  }
+</style>
