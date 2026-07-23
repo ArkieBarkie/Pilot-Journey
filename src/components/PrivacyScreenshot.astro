@@ -1,0 +1,143 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  variant: "dashboard" | "inbox" | "live-flight" | "career";
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
+}
+
+const {
+  src,
+  alt,
+  variant,
+  loading = "lazy",
+  fetchpriority,
+} = Astro.props;
+---
+
+<div class:list={["privacy-shot", `privacy-shot--${variant}`]}>
+  <img
+    src={src}
+    alt={alt}
+    width="1920"
+    height="1080"
+    loading={loading}
+    fetchpriority={fetchpriority}
+  />
+
+  {
+    variant === "dashboard" && (
+      <span class="privacy-mask mask-dashboard-title" aria-hidden="true">DEMO PILOT</span>
+    )
+  }
+
+  {
+    variant === "inbox" && (
+      <span class="privacy-mask mask-inbox-salutation" aria-hidden="true">Dear Demo Pilot,</span>
+    )
+  }
+
+  {
+    variant === "career" && (
+      <>
+        <span class="privacy-mask mask-career-title" aria-hidden="true">DEMO PILOT</span>
+        <span class="privacy-mask mask-career-mrz" aria-hidden="true">
+          P&lt;NLDEMO&lt;&lt;PILOT&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+        </span>
+      </>
+    )
+  }
+
+  <span class="privacy-mask mask-sidebar-name" aria-hidden="true">DEMO PILOT</span>
+</div>
+
+<style>
+  .privacy-shot {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    container-type: inline-size;
+  }
+
+  .privacy-shot > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .privacy-mask {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .mask-sidebar-name {
+    left: 3.62%;
+    top: 93.55%;
+    width: 6.45%;
+    height: 2.8%;
+    color: #f4efe5;
+    background: #07466f;
+    font-family: "Arial Narrow", Arial, sans-serif;
+    font-size: 0.56cqw;
+    font-weight: 700;
+    letter-spacing: 0.025em;
+  }
+
+  .mask-dashboard-title {
+    left: 33.85%;
+    top: 8.7%;
+    width: 11.2%;
+    height: 3.9%;
+    color: #171717;
+    background: #e7e4dd;
+    font-family: Arial, sans-serif;
+    font-size: 1.38cqw;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .mask-inbox-salutation {
+    left: 35.4%;
+    top: 36.55%;
+    width: 11.9%;
+    height: 3.3%;
+    color: #514c45;
+    background: #f4f1eb;
+    font-family: Arial, sans-serif;
+    font-size: 0.86cqw;
+    letter-spacing: -0.02em;
+  }
+
+  .mask-career-title {
+    left: 22.75%;
+    top: 14.2%;
+    width: 13.2%;
+    height: 4.7%;
+    color: #171717;
+    background: #f1eee7;
+    font-family: Arial, sans-serif;
+    font-size: 1.8cqw;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .mask-career-mrz {
+    left: 14.5%;
+    top: 31.9%;
+    width: 22.4%;
+    height: 2.25%;
+    color: #77736d;
+    background: #e6e3dc;
+    font-family: "Courier New", monospace;
+    font-size: 0.57cqw;
+    letter-spacing: 0.09em;
+  }
+</style>
